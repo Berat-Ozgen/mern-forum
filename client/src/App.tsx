@@ -9,18 +9,20 @@ import Login from "./pages/Login";
 
 const App = () => {
   return (
-    <BrowserRouter>
-      <Navbar />
-      <div className="flex">
-        <Sidebar />
-        <Routes>
-          <Route path="/" element={<Questions />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-        </Routes>
-      </div>
-      <Footer />
-    </BrowserRouter>
+    <div className="h-full">
+      <BrowserRouter>
+        <Navbar />
+        <div className="flex">
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<Questions />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </div>
+        <Footer />
+      </BrowserRouter>
+    </div>
   );
 };
 

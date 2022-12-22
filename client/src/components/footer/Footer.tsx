@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <>
-      <footer className="p-4 bg-white border-t-2 border-gray-700 shadow md:px-6 md:py-8 dark:bg-gray-900">
+      <footer className="p-4 bg-white border-t-2  border-gray-700 shadow md:px-6 md:py-8 dark:bg-gray-900">
         <div className="sm:flex sm:items-center sm:justify-between">
           <div className="flex items-center mb-4 sm:mb-0">
             <img
