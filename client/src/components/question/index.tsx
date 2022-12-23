@@ -1,4 +1,5 @@
 import React from "react";
+import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
 interface Iprops {
   name: string;
@@ -13,14 +14,18 @@ const QuestionsCont = ({ name, img, question }: Iprops) => {
         <div>
           <img className="w-10 h-10 rounded-full" src={img} />
         </div>
-        <div>{name}</div>
+        <div className="text-green-300">{name}</div>
       </div>
       <div className="flex flex-[8] h-full justify-center  items-center">
-        <span className="text-xl">{question}</span>
+        <span className="text-xl text-red-400">{question}</span>
       </div>
-      <div className="flex justify-around flex-[1]">
-        <div>like</div>
-        <div>dislike</div>
+      <div className="flex justify-evenly flex-[1]">
+        <div className="text-green-900">
+          <AiOutlineLike />
+        </div>
+        <div className="text-red-900">
+          <AiOutlineDislike />
+        </div>
       </div>
     </div>
   );

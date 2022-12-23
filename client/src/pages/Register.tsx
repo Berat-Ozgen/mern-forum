@@ -10,12 +10,12 @@ const Register = () => {
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
           />
-          Flowbite
+          BrtForum
         </div>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
-              Create and account
+              Yeni Hesap Oluştur
             </h1>
             <form className="space-y-4 md:space-y-6" action="#">
               <div>
@@ -23,7 +23,7 @@ const Register = () => {
                   form="email"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Your email
+                  Email
                 </label>
                 <input
                   type="email"
@@ -38,7 +38,7 @@ const Register = () => {
                   form="password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Password
+                  Şifre
                 </label>
                 <input
                   type="password"
@@ -53,7 +53,7 @@ const Register = () => {
                   form="confirm-password"
                   className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
                 >
-                  Confirm password
+                  Şifre Tekrarı
                 </label>
                 <input
                   type="confirm-password"
@@ -77,23 +77,21 @@ const Register = () => {
                     form="terms"
                     className="font-light text-gray-500 dark:text-gray-300"
                   >
-                    I accept the{" "}
-                    <div className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                      Terms and Conditions
-                    </div>
+                    Koşulları kabul ediyormusun
+                    <div className="font-medium text-primary-600 hover:underline dark:text-primary-500"></div>
                   </label>
                 </div>
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-full text-white bg-green-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
-                Create an account
+                Hesap oluştur
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Already have an account?{" "}
+                Zaten hesabın var mı ?
                 <div className="font-medium text-primary-600 hover:underline dark:text-primary-500">
-                  Login here
+                  Giriş Yap
                 </div>
               </p>
             </form>
