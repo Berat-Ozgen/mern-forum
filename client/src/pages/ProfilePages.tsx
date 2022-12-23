@@ -13,9 +13,21 @@ const ProfilePages = () => {
           />
         </div>
         <div className="text-green-200 text-4xl">Berat Özgen</div>
+        <div className="text-green-200 text-lg">
+          Türkiyede yaşıyorum javascirpt react typescript ile ugraşıyorum
+        </div>
       </div>
-      <div className="flex flex-1">
-        <QuestionsCont />
+      <div className="flex flex-1 flex-col  items-center  justify-evenly">
+        <QuestionsCont
+          name={"berat"}
+          img={"https://picsum.photos/200/305"}
+          question={"bu bir deneme yazısıdır 6"}
+        />
+        <QuestionsCont
+          name={"berat"}
+          img={"https://picsum.photos/200/305"}
+          question={"bu bir deneme yazısıdır 6"}
+        />
       </div>
       <div className="flex flex-1">3</div>
     </div>
