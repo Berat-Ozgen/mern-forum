@@ -7,7 +7,7 @@ interface Iprops {
   question: string;
 }
 
-const QuestionsCont = ({ name, img, question }: Iprops) => {
+const QuestionsCont: React.FC<Iprops> = ({ name, img, question }) => {
   return (
     <div className="flex h-20 w-4/5 items-center m-6 border">
       <div className="flex flex-col items-center  flex-[1]">

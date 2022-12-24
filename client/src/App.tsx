@@ -8,7 +8,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProfilePages from "./pages/ProfilePages";
 
-const App = () => {
+const App: React.FC = () => {
   return (
     <div className="h-full">
       <BrowserRouter>

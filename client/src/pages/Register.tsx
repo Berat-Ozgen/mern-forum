@@ -1,20 +1,25 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+const Register: React.FC = () => {
   const [username, setUsername] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<string | number>("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/users/create-user", {
+      .post("http://localhost:8000/api/auth/register", {
         username: username,
         email: email,
         password: password,
       })
-      .then((res) => console.log(res));
+      .then((res: any): void => console.log(res.data))
+      .finally((): void => navigate("/login"));
   };
 
   return (
@@ -46,7 +51,9 @@ const Register = () => {
                   Email
                 </label>
                 <input
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                    setEmail(e.target.value)
+                  }
                   type="email"
                   name="email"
                   id="email"
@@ -62,7 +69,9 @@ const Register = () => {
                   Şifre
                 </label>
                 <input
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                    setPassword(e.target.value)
+                  }
                   type="password"
                   name="password"
                   id="password"
@@ -78,7 +87,9 @@ const Register = () => {
                   Username
                 </label>
                 <input
-                  onChange={(e) => setUsername(e.target.value)}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                    setUsername(e.target.value)
+                  }
                   type="text"
                   name="Username"
                   id="Username"

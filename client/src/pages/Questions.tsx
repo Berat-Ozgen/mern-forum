@@ -2,7 +2,7 @@ import React from "react";
 import QuestionsCont from "../components/question";
 import { fakeData } from "../data";
 
-const Questions = () => {
+const Questions: React.FC = () => {
   return (
     <div className="p-6 w-full h-screen flex flex-col flex-nowrap items-center overflow-auto bg-gray-900">
       <div className="flex w-full mb-4 justify-between">

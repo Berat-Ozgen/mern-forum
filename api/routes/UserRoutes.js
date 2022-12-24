@@ -17,13 +17,13 @@ router.get("/get-user", async (req, res) => {
   }
 });
 
-//Kayıt olmak
+//kullanıcı eklemek olmak
 router.post("/create-user", async (req, res) => {
   try {
     const user = await new User(req.body);
     await user.save();
     console.log(`${user} kullanıcı başarılı şekilde eklendi`);
-    res.status(200).json(user);
+    res.status(200).json("başarılı bir şekilde kayıt olundu");
   } catch (error) {
     res.status(404).json({ error: error });
   }

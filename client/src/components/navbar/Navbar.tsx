@@ -1,6 +1,6 @@
 import React from "react";
 
-const Navbar = () => {
+const Navbar: React.FC = () => {
   return (
     <div className="flex justify-around items-center h-16 ali w-full bg-gray-800 border border-black ">
       <div className="flex-[2] text-center text-cyan-300 text-xl">BRTFORM</div>

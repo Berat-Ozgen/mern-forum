@@ -1,6 +1,28 @@
-import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Login = () => {
+const Login: React.FC = () => {
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string | number>("");
+  const navigate = useNavigate();
+
+  const handleSubmit = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:8000/api/auth/login", {
+        email: email,
+        password: password,
+      })
+      .then((res: any): void => {
+        if (res.status === 200) {
+          navigate("/");
+        }
+      });
+  };
+
   return (
     <section className="bg-gray-50 w-full dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -17,7 +39,7 @@ const Login = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign in to your account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
                 <label
                   form="email"
@@ -26,6 +48,9 @@ const Login = () => {
                   Your email
                 </label>
                 <input
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                    setEmail(e.target.value)
+                  }
                   type="email"
                   name="email"
                   id="email"
@@ -41,6 +66,9 @@ const Login = () => {
                   Password
                 </label>
                 <input
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
+                    setPassword(e.target.value)
+                  }
                   type="password"
                   name="password"
                   id="password"
@@ -67,24 +95,24 @@ const Login = () => {
                     </label>
                   </div>
                 </div>
-                <div className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500">
-                  Forgot password?
+                <div className="text-sm font-medium text-white hover:underline dark:text-primary-500">
+                  Şifreyimi unuttun ?
                 </div>
               </div>
               <button
                 type="submit"
-                className="w-full text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+                className="w-full text-white bg-green-500 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Sign in
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                 Don’t have an account yet?{" "}
-                <a
-                  href="#"
+                <Link
+                  to="/register"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Sign up
-                </a>
+                </Link>
               </p>
             </form>
           </div>
