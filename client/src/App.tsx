@@ -7,11 +7,11 @@ import Questions from "./pages/Questions";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProfilePages from "./pages/ProfilePages";
-import useRealTime from "./hook/RealTime";
+import useBrowser from "./hook/useBrowser";
 
 const App: React.FC = () => {
-  const realTime = useRealTime();
-  console.log(realTime);
+  const browser = useBrowser();
+  console.log(browser);
   return (
     <div className="h-full">
       <BrowserRouter>
