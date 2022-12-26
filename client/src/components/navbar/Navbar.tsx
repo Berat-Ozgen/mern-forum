@@ -1,9 +1,6 @@
-import React, { useContext } from "react";
-import authContext from "../../context/auth";
+import React from "react";
 
 const Navbar: React.FC = () => {
-  const data = useContext(authContext);
-  console.log(data);
   return (
     <div className="flex justify-around items-center h-16 ali w-full bg-gray-800 border border-black ">
       <div className="flex-[2] text-center text-cyan-300 text-xl">BRTFORM</div>
