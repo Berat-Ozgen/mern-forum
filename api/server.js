@@ -4,6 +4,7 @@ const app = express();
 const cors = require("cors");
 const UserRoutes = require("./routes/UserRoutes.js");
 const AuthRoutes = require("./routes/AuthRoutes.js");
+const Questions = require("./routes/QuestionsRoutes.js");
 
 app.use(express.json());
 app.use(cors());
@@ -21,6 +22,7 @@ const connect = async () => {
 
 app.use("/api/users", UserRoutes);
 app.use("/api/auth", AuthRoutes);
+app.use("/api/questions", Questions);
 
 app.listen(8000, () => {
   console.log("8000 port listening on");

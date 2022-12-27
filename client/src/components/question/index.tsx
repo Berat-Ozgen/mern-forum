@@ -3,6 +3,7 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 
 interface Iprops {
   name: string;
+  key: number;
   img: string;
   question: string;
 }
@@ -19,12 +20,12 @@ const QuestionsCont: React.FC<Iprops> = ({ name, img, question }) => {
       <div className="flex flex-[8] h-full justify-center items-center">
         <span className="text-xl text-red-400">{question}</span>
       </div>
-      <div className="flex justify-evenly flex-[1]">
-        <div className="text-green-900">
-          <AiOutlineLike />
+      <div className="flex items-center justify-evenly flex-[1]">
+        <div className="text-green-900 cursor-pointer">
+          <AiOutlineLike size={25} />
         </div>
-        <div className="text-red-900">
-          <AiOutlineDislike />
+        <div className="text-red-900 cursor-pointer">
+          <AiOutlineDislike size={25} />
         </div>
       </div>
     </div>

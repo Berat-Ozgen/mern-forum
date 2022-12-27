@@ -1,7 +1,7 @@
 import React from "react";
 import QuestionsCont from "../components/question";
 
-const ProfilePages: React.FC = () => {
+const ProfilePages: React.FC = (): JSX.Element => {
   return (
     <div className="w-full flex flex-col bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-1 flex-col justify-evenly items-center">
@@ -19,11 +19,13 @@ const ProfilePages: React.FC = () => {
       </div>
       <div className="flex flex-1 flex-col  items-center  justify-evenly">
         <QuestionsCont
+          key={1}
           name={"berat"}
           img={"https://picsum.photos/200/305"}
           question={"bu bir deneme yazısıdır 6"}
         />
         <QuestionsCont
+          key={2}
           name={"berat"}
           img={"https://picsum.photos/200/305"}
           question={"bu bir deneme yazısıdır 6"}

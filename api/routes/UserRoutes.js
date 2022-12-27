@@ -3,7 +3,6 @@ const User = require("../models/Users");
 const bcrypt = require("bcrypt");
 
 // bir kullanıcı getirme
-
 router.get("/get-user", async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
@@ -17,12 +16,32 @@ router.get("/get-user", async (req, res) => {
   }
 });
 
+// navbar kullanıcı getirme
+
+// router.post("/navbar-users", async (req, res) => {
+//   try {
+//     const user = await User.findOne({ username: req.body.username });
+//   } catch (error) {
+//     res.status(500).json(error);
+//   }
+// });
+
+// bütün kullanıcıları getir
+router.get("/get-all-users", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.status(200).json(users);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 //kullanıcı eklemek olmak
 router.post("/create-user", async (req, res) => {
   try {
     const user = await new User(req.body);
     await user.save();
-    console.log(`${user} kullanıcı başarılı şekilde eklendi`);
+
     res.status(200).json("başarılı bir şekilde kayıt olundu");
   } catch (error) {
     res.status(404).json({ error: error });

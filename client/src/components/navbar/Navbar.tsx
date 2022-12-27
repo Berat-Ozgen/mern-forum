@@ -1,14 +1,26 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { MdOutlineNotifications } from "react-icons/md";
 import { ImExit } from "react-icons/im";
 import AuthContext from "../../context/authContext";
-import userEvent from "@testing-library/user-event";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
+interface IgetAllUsers {
+  _id: string;
+  username: string;
+  email: string;
+  password: string;
+  images: string;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
 const Navbar: React.FC = () => {
+  const [usernamee, setUserName] = useState<string>("");
+  const [allUsers, setAllUsers] = useState<IgetAllUsers[]>([]);
+
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(user);
 
   const handleOut = () => {
     localStorage.removeItem("users");
@@ -16,12 +28,32 @@ const Navbar: React.FC = () => {
     setUser(false);
   };
 
+  const getAllUsers = async (): Promise<void> => {
+    await axios
+      .get<any>("http://localhost:8000/api/users/get-all-users")
+      .then((res: any) => {
+        if (res.status === 200) {
+          setAllUsers(res.data);
+        }
+      });
+  };
+
+  const filtredUsers = allUsers?.filter((item) =>
+    item.username.startsWith(usernamee)
+  );
+
+  console.log(filtredUsers);
+
   return (
     <div className="flex justify-around items-center h-16 ali w-full bg-gray-800 border border-black ">
       <div className="flex-[2] text-center text-cyan-300 text-xl">BRTFORM</div>
 
       <div className="flex flex-[5] justify-center items-center">
         <input
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setUserName(e.target.value);
+          }}
+          onFocus={getAllUsers}
           type="text"
           id="success"
           className="bg-green-50 border border-none outline-none text-orange-500  placeholder-sky-700  text-sm rounded-lg block w-3/4 p-2.5 dark:bg-gray-700 dark:border-green-500"
