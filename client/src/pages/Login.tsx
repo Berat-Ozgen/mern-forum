@@ -9,7 +9,7 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
 
-  interface Deneme {
+  interface User {
     createdAt: string;
     email: string;
     images: string;
@@ -25,7 +25,7 @@ const Login: React.FC = () => {
   ): Promise<void> => {
     e.preventDefault();
     axios
-      .post<Deneme>("http://localhost:8000/api/auth/login", {
+      .post<User>("http://localhost:8000/api/auth/login", {
         email: email,
         password: password,
       })
