@@ -1,8 +1,11 @@
-import React from "react";
+import { useContext } from "react";
 import QuestionsCont from "../components/question";
 import { fakeData } from "../data";
+import AuthContext from "../context/authContext";
 
 const Questions: React.FC = () => {
+  const { user, setUser } = useContext(AuthContext);
+
   return (
     <div className="p-6 w-full h-screen flex flex-col flex-nowrap items-center overflow-auto bg-gray-900">
       <div className="flex w-full mb-4 justify-between">

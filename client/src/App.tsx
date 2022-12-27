@@ -7,27 +7,27 @@ import Questions from "./pages/Questions";
 import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProfilePages from "./pages/ProfilePages";
-import useBrowser from "./hook/useBrowser";
+import { AuthContextProvider } from "./context/authContext";
 
 const App: React.FC = () => {
-  const browser = useBrowser();
-  console.log(browser);
   return (
-    <div className="h-full">
-      <BrowserRouter>
-        <Navbar />
-        <div className="flex">
-          <Sidebar />
-          <Routes>
-            <Route path="/" element={<Questions />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/profile" element={<ProfilePages />} />
-          </Routes>
-        </div>
-        <Footer />
-      </BrowserRouter>
-    </div>
+    <AuthContextProvider>
+      <div className="h-full">
+        <BrowserRouter>
+          <Navbar />
+          <div className="flex">
+            <Sidebar />
+            <Routes>
+              <Route path="/" element={<Questions />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/profile" element={<ProfilePages />} />
+            </Routes>
+          </div>
+          <Footer />
+        </BrowserRouter>
+      </div>
+    </AuthContextProvider>
   );
 };
 

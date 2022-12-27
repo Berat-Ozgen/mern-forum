@@ -1,23 +1,37 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import AuthContext from "../context/authContext";
 
 const Login: React.FC = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string | number>("");
   const navigate = useNavigate();
+  const { user, setUser } = useContext(AuthContext);
+
+  interface Deneme {
+    createdAt: string;
+    email: string;
+    images: string;
+    password: string;
+    updatedAt: string;
+    username: string;
+    __v: string;
+    _id: string;
+  }
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/auth/login", {
+      .post<Deneme>("http://localhost:8000/api/auth/login", {
         email: email,
         password: password,
       })
       .then((res: any): void => {
         if (res.status === 200) {
+          setUser(res.data);
           navigate("/");
         }
       });
@@ -32,7 +46,7 @@ const Login: React.FC = () => {
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/logo.svg"
             alt="logo"
           />
-          Flowbite
+          BrtForum
         </div>
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
