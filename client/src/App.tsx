@@ -9,7 +9,7 @@ import Login from "./pages/Login";
 import ProfilePages from "./pages/ProfilePages";
 import { AuthContextProvider } from "./context/authContext";
 
-const App: React.FC = () => {
+const App: React.FC = (): JSX.Element => {
   return (
     <AuthContextProvider>
       <div className="h-full">

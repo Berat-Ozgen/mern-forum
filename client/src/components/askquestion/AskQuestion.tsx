@@ -15,11 +15,13 @@ const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
       userId: user._id,
       username: user.username,
       des: des,
-    }).then((res) => console.log(res));
+    })
+      .then((res) => console.log(res))
+      .finally(() => setModal(false));
   };
 
   return (
-    <div className="absolute top-1/2 left-1/2 flex flex-col  transform -translate-x-1/2 -translate-y-1/2 w-2/4 h-2/4 bg-slate-800">
+    <div className="absolute top-1/2 left-1/2 flex flex-col z-10  transform -translate-x-1/2 -translate-y-1/2 w-2/4 h-2/4 bg-slate-800">
       <div className="flex flex-1 text-6xl font-light items-center justify-center text-yellow-50">
         Soru Sor
       </div>
@@ -31,15 +33,14 @@ const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
                 setDes(e.target.value)
               }
               type="text"
-              id="default-input"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2.5 dark:bg-gray-700 outline-none dark:placeholder-gray-400 dark:text-white"
             />
           </div>
           <div className="flex-[1]">
             <button
               onClick={handleQuestion}
               type="button"
-              className="py-2.5 px-5 mr-2 mb-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              className="w-full h-full items-center justify-center text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-100 hover:bg-gray-100     dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
             >
               Soruyu gonder
             </button>
