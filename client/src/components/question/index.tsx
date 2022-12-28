@@ -5,10 +5,9 @@ import AuthContext from "../../context/authContext";
 
 interface Iprops {
   name: string;
-  key: number;
   img: string;
   question: string;
-  id?: string;
+  id: string;
 }
 
 const QuestionsCont: React.FC<Iprops> = ({ name, img, question, id }) => {

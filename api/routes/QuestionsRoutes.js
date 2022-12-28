@@ -21,4 +21,14 @@ router.get("/get-all-questions", async (req, res) => {
   }
 });
 
+router.get("/get-usersposts", async (req, res) => {
+  const userId = req.query.userId;
+  const username = req.query.username;
+  try {
+    const questions = await Questions.find({ username: username });
+    res.status(200).json(questions);
+  } catch (error) {
+    res.status(500).json("bir hata oluştu");
+  }
+});
 module.exports = router;

@@ -5,6 +5,7 @@ import AuthContext from "../context/authContext";
 
 const ProfilePages: React.FC = (): JSX.Element => {
   const [aUsers, setAUsers] = useState<any>();
+  const [usersPosts, setUsersPosts] = useState<any>();
 
   const { user } = useContext(AuthContext);
 
@@ -16,9 +17,22 @@ const ProfilePages: React.FC = (): JSX.Element => {
       });
   };
 
+  const getAUsersPosts = async () => {
+    await axios
+      .get(
+        `http://localhost:8000/api/questions/get-usersposts?username=${user.username}`
+      )
+      .then((res) => {
+        setUsersPosts(res.data);
+      });
+  };
+
   useEffect(() => {
     getAUsers();
+    getAUsersPosts();
   }, []);
+
+  console.log(usersPosts);
 
   return (
     <div className="w-full flex flex-col bg-gray-50 dark:bg-gray-900">
@@ -36,18 +50,15 @@ const ProfilePages: React.FC = (): JSX.Element => {
         </div>
       </div>
       <div className="flex flex-1 flex-col  items-center  justify-evenly">
-        <QuestionsCont
-          key={1}
-          name={"berat"}
-          img={"https://picsum.photos/200/305"}
-          question={"bu bir deneme yazısıdır 6"}
-        />
-        <QuestionsCont
-          key={2}
-          name={"berat"}
-          img={"https://picsum.photos/200/305"}
-          question={"bu bir deneme yazısıdır 6"}
-        />
+        {usersPosts?.map((item: any) => (
+          <QuestionsCont
+            id={item.userId}
+            name={item.username}
+            key={item.createdAt}
+            img={item.img || "https://picsum.photos/id/237/200/300"}
+            question={item.des}
+          />
+        ))}
       </div>
       <div className="flex flex-1">3</div>
     </div>
