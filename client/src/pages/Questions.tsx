@@ -37,6 +37,7 @@ const Questions: React.FC = (): JSX.Element => {
       </div>
       {questions?.map((item) => (
         <QuestionsCont
+          id={item.userId}
           name={item.username}
           key={item.createdAt}
           img={item.img || "https://picsum.photos/id/237/200/300"}

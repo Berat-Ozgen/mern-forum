@@ -42,11 +42,18 @@ const Navbar: React.FC = () => {
     item.username.startsWith(usernamee)
   );
 
-  console.log(filtredUsers);
+  const getAUsers = async () => {
+    navigate("/profile");
+  };
 
   return (
     <div className="flex justify-around items-center h-16 ali w-full bg-gray-800 border border-black ">
-      <div className="flex-[2] text-center text-cyan-300 text-xl">BRTFORM</div>
+      <div
+        className="flex-[2] text-center text-cyan-300 text-xl"
+        onClick={() => navigate("/")}
+      >
+        BRTFORM
+      </div>
 
       <div className="flex flex-[5] justify-center items-center">
         <input
@@ -65,6 +72,7 @@ const Navbar: React.FC = () => {
         <div>
           {user ? (
             <img
+              onClick={getAUsers}
               className="w-10 h-10 rounded-full"
               src="https://picsum.photos/200/300"
               alt="Rounded avatar"
