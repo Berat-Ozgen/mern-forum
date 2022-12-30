@@ -3,36 +3,44 @@ import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/authContext";
 
-const Login: React.FC = () => {
+const Login: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string | number>("");
+  const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
 
-  interface User {
-    createdAt: string;
+  // interface User {
+  //   createdAt: string;
+  //   email: string;
+  //   images: string;
+  //   password: string;
+  //   updatedAt: string;
+  //   username: string;
+  //   __v: string;
+  //   _id: string;
+  // }
+
+  interface LoginData {
     email: string;
-    images: string;
     password: string;
-    updatedAt: string;
-    username: string;
-    __v: string;
-    _id: string;
   }
+
+  const loginData: LoginData = {
+    email: email,
+    password: password,
+  };
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  ): Promise<any> => {
     e.preventDefault();
     axios
-      .post<User>("http://localhost:8000/api/auth/login", {
-        email: email,
-        password: password,
-      })
+      .post("http://localhost:8000/api/auth/login", loginData)
       .then((res: any): void => {
         if (res.status === 200) {
           setUser(res.data);
           navigate("/");
+          console.log(res);
         }
       });
   };
