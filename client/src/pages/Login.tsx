@@ -38,7 +38,6 @@ const Login: React.FC = (): JSX.Element => {
         if (res.status === 200) {
           setUser(res.data);
           navigate("/");
-          console.log(res);
         }
       });
   };
@@ -69,7 +68,7 @@ const Login: React.FC = (): JSX.Element => {
                 </label>
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                    setEmail(e.target.value)
+                    setEmail(e.target.value as string)
                   }
                   type="email"
                   name="email"
@@ -87,7 +86,7 @@ const Login: React.FC = (): JSX.Element => {
                 </label>
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                    setPassword(e.target.value)
+                    setPassword(e.target.value as string)
                   }
                   type="password"
                   name="password"

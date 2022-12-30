@@ -2,24 +2,32 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface IRegisterPost {
+  username: string;
+  email: string;
+  password: string;
+}
+
 const Register: React.FC = () => {
-  const [username, setUsername] = useState<string>("");
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string | number>("");
+  const [username, setUsername] = useState<IRegisterPost["username"]>("");
+  const [email, setEmail] = useState<IRegisterPost["email"]>("");
+  const [password, setPassword] = useState<IRegisterPost["password"]>("");
   const navigate = useNavigate();
+
+  const registerPost: IRegisterPost = {
+    username: username,
+    email: email,
+    password: password,
+  };
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/auth/register", {
-        username: username,
-        email: email,
-        password: password,
-      })
-      .then((res: any): void => console.log(res.data))
-      .finally((): void => navigate("/login"));
+      .post("http://localhost:8000/api/auth/register", registerPost)
+      .then((res) => console.log(res.data))
+      .finally(() => navigate("/login"));
   };
 
   return (
@@ -52,7 +60,7 @@ const Register: React.FC = () => {
                 </label>
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                    setEmail(e.target.value)
+                    setEmail(e.target.value as string)
                   }
                   type="email"
                   name="email"
@@ -70,7 +78,7 @@ const Register: React.FC = () => {
                 </label>
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                    setPassword(e.target.value)
+                    setPassword(e.target.value as string)
                   }
                   type="password"
                   name="password"
@@ -88,7 +96,7 @@ const Register: React.FC = () => {
                 </label>
                 <input
                   onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                    setUsername(e.target.value)
+                    setUsername(e.target.value as string)
                   }
                   type="text"
                   name="Username"
