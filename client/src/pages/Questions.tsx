@@ -20,8 +20,6 @@ const Questions: React.FC = (): JSX.Element => {
     allQuestions();
   }, []);
 
-  console.log(questions);
-
   return (
     <div className="p-6 w-full h-screen flex flex-col flex-nowrap items-center overflow-auto bg-gray-900">
       <div className="flex w-full mb-4 justify-between">

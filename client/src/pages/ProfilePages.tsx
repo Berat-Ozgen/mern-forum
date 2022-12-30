@@ -1,15 +1,36 @@
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 import { useEffect, useContext, useState } from "react";
 import QuestionsCont from "../components/question";
 import AuthContext from "../context/authContext";
 
+interface User {
+  createdAt: string;
+  email: string;
+  images: string;
+  password: string;
+  updatedAt: string;
+  username: string;
+  __v: number;
+  _id: string;
+}
+
+interface IUsersPost {
+  createdAt: string;
+  des: string;
+  updatedAt: string;
+  userId: string;
+  username: string;
+  __v: number;
+  _id: string;
+}
+
 const ProfilePages: React.FC = (): JSX.Element => {
-  const [aUsers, setAUsers] = useState<any>();
-  const [usersPosts, setUsersPosts] = useState<any>();
+  const [aUsers, setAUsers] = useState<User>();
+  const [usersPosts, setUsersPosts] = useState<IUsersPost[]>();
 
   const { user } = useContext(AuthContext);
 
-  const getAUsers = async () => {
+  const getAUsers = async (): Promise<void> => {
     await axios
       .get(`http://localhost:8000/api/users/get-user?username=${user.username}`)
       .then((res) => {
@@ -17,7 +38,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
       });
   };
 
-  const getAUsersPosts = async () => {
+  const getAUsersPosts = async (): Promise<void> => {
     await axios
       .get(
         `http://localhost:8000/api/questions/get-usersposts?username=${user.username}`
@@ -28,11 +49,11 @@ const ProfilePages: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    getAUsers();
-    getAUsersPosts();
+    if (aUsers || usersPosts === undefined) {
+      getAUsers();
+      getAUsersPosts();
+    }
   }, []);
-
-  console.log(usersPosts);
 
   return (
     <div className="w-full flex flex-col bg-gray-50 dark:bg-gray-900">

@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios, { AxiosHeaders } from "axios";
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/authContext";
@@ -9,16 +9,14 @@ const Login: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
 
-  // interface User {
-  //   createdAt: string;
-  //   email: string;
-  //   images: string;
-  //   password: string;
-  //   updatedAt: string;
-  //   username: string;
-  //   __v: string;
-  //   _id: string;
-  // }
+  interface IResponse {
+    config: object;
+    data: object;
+    headers: AxiosHeaders;
+    request: XMLHttpRequest;
+    status: number;
+    statusText: string;
+  }
 
   interface LoginData {
     email: string;
@@ -35,7 +33,7 @@ const Login: React.FC = (): JSX.Element => {
   ): Promise<any> => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/auth/login", loginData)
+      .post<IResponse>("http://localhost:8000/api/auth/login", loginData)
       .then((res: any): void => {
         if (res.status === 200) {
           setUser(res.data);
