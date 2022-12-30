@@ -6,18 +6,29 @@ type AskQuestionProps = {
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+interface QuestionsPost {
+  userId: string;
+  username: string;
+  des: string;
+}
+
 const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
-  const [des, setDes] = useState<string>("");
+  const [des, setDes] = useState("" as string);
   const { user, setUser } = useContext(AuthContext);
 
-  const handleQuestion = () => {
-    Axios.post<any>("http://localhost:8000/api/questions/create-questions", {
-      userId: user._id,
-      username: user.username,
-      des: des,
-    })
+  const quesPost: QuestionsPost = {
+    userId: user._id,
+    username: user.username,
+    des: des,
+  };
+
+  const handleQuestion = async (): Promise<void> => {
+    await Axios.post(
+      "http://localhost:8000/api/questions/create-questions",
+      quesPost
+    )
       .then((res) => console.log(res))
-      .finally(() => setModal(false));
+      .finally(() => setModal(false as boolean));
   };
 
   return (
@@ -30,7 +41,7 @@ const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
           <div className="flex-[3] mr-2">
             <input
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void =>
-                setDes(e.target.value)
+                setDes(e.target.value as string)
               }
               type="text"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg   w-full p-2.5 dark:bg-gray-700 outline-none dark:placeholder-gray-400 dark:text-white"
@@ -49,7 +60,7 @@ const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
       </div>
       <div className="flex flex-1 text-6xl w-full  items-center justify-center">
         <button
-          onClick={() => setModal(false)}
+          onClick={() => setModal(false as boolean)}
           type="button"
           className="py-2.5 w-40 px-5 mr-2 mb-2 text-sm font-medium text-white focus:outline-none bg-red-700 rounded-lg  hover:bg-red-600  focus:z-10 "
         >

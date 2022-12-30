@@ -1,14 +1,6 @@
 import { createContext, useEffect, useState } from "react";
 
-type DenemeContextType = {
-  user: any;
-  setUser: (newUser: any) => void;
-};
-
-const AuthContext = createContext<DenemeContextType>({
-  user: "",
-  setUser: () => {},
-});
+const AuthContext = createContext<any>({});
 
 export const AuthContextProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>(() => {
