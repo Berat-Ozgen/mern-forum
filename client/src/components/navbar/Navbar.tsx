@@ -16,7 +16,7 @@ interface IgetAllUsers {
   __v: number;
 }
 const Navbar: React.FC = () => {
-  const [usernamee, setUserName] = useState<string>("");
+  const [usernamee, setUserName] = useState("" as string);
   const [allUsers, setAllUsers] = useState<IgetAllUsers[]>([]);
 
   const { user, setUser } = useContext(AuthContext);
@@ -25,13 +25,13 @@ const Navbar: React.FC = () => {
   const handleOut = () => {
     localStorage.removeItem("users");
     navigate("/login");
-    setUser(false);
+    setUser(false as boolean);
   };
 
   const getAllUsers = async (): Promise<void> => {
     await axios
-      .get<any>("http://localhost:8000/api/users/get-all-users")
-      .then((res: any) => {
+      .get("http://localhost:8000/api/users/get-all-users")
+      .then((res) => {
         if (res.status === 200) {
           setAllUsers(res.data);
         }
@@ -41,10 +41,6 @@ const Navbar: React.FC = () => {
   const filtredUsers = allUsers?.filter((item) =>
     item.username.startsWith(usernamee)
   );
-
-  const getAUsers = async () => {
-    navigate("/profile");
-  };
 
   return (
     <div className="flex justify-around items-center h-16 ali w-full bg-gray-800 border border-black ">
@@ -58,7 +54,7 @@ const Navbar: React.FC = () => {
       <div className="flex flex-[5] justify-center items-center">
         <input
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-            setUserName(e.target.value);
+            setUserName(e.target.value as string);
           }}
           onFocus={getAllUsers}
           type="text"
@@ -72,7 +68,7 @@ const Navbar: React.FC = () => {
         <div>
           {user ? (
             <img
-              onClick={getAUsers}
+              onClick={() => navigate("/profile")}
               className="w-10 h-10 rounded-full"
               src="https://picsum.photos/200/300"
               alt="Rounded avatar"
@@ -86,7 +82,6 @@ const Navbar: React.FC = () => {
         <div className="cursor-pointer">
           {user ? (
             <div className="flex items-center justify-center  w-full h-full">
-              {" "}
               <MdOutlineNotifications color="grey" size={35} />
             </div>
           ) : (
@@ -104,8 +99,7 @@ const Navbar: React.FC = () => {
               onClick={handleOut}
               className="flex items-center justify-center  w-full h-full"
             >
-              {" "}
-              <ImExit size={32} color={"grey"} />{" "}
+              <ImExit size={32} color={"grey"} />
             </div>
           ) : (
             <div

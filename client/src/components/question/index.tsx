@@ -10,7 +10,12 @@ interface Iprops {
   id: string;
 }
 
-const QuestionsCont: React.FC<Iprops> = ({ name, img, question, id }) => {
+const QuestionsCont: React.FC<Iprops> = ({
+  name,
+  img,
+  question,
+  id,
+}): JSX.Element => {
   const { user, setUser } = useContext(AuthContext);
 
   return (

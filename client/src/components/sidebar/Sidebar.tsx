@@ -2,7 +2,7 @@ import React from "react";
 import { SlHome, SlLike, SlPeople } from "react-icons/sl";
 import { MdTrendingUp } from "react-icons/md";
 
-const Sidebar: React.FC = () => {
+const Sidebar: React.FC = (): JSX.Element => {
   return (
     <aside className="w-64 h-full" aria-label="Sidebar">
       <div className="overflow-y-auto h-screen py-4 px-3 bg-gray-50  dark:bg-gray-800">

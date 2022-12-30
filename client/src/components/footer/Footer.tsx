@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../../context/authContext";
 
-const Footer: React.FC = () => {
+const Footer: React.FC = (): JSX.Element => {
   const { user, setUser } = useContext(AuthContext);
 
   return (
