@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
 
 function useRealDate(): string {
-  const [realDate, setRealDate] = useState(new Date());
+  const [realDate, setRealDate] = useState(new Date() as Date);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setRealDate(new Date());
+      setRealDate(new Date() as Date);
     }, 1000);
 
     return () => clearInterval(interval);

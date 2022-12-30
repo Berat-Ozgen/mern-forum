@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 function useBrowser(): string {
-  const [browser, setBrowser] = useState("");
+  const [browser, setBrowser] = useState("" as string);
 
   useEffect(() => {
     const userAgent = navigator.userAgent;
