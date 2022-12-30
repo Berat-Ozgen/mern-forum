@@ -5,12 +5,23 @@ import AuthContext from "../context/authContext";
 import AskQuestion from "../components/askquestion/AskQuestion";
 import axios from "axios";
 
+interface IRecord {
+  createdAt: string;
+  des: string;
+  updatedAt: string;
+  userId: string;
+  username: string;
+  __v: number;
+  _id: string;
+  img?: string;
+}
+
 const Questions: React.FC = (): JSX.Element => {
   const { user, setUser } = useContext(AuthContext);
   const [modal, setModal] = useState<boolean>(false);
-  const [questions, setQuestions] = useState<any[]>([]);
+  const [questions, setQuestions] = useState<IRecord[]>([]);
 
-  const allQuestions = async () => {
+  const allQuestions = async (): Promise<void> => {
     await axios
       .get("http://localhost:8000/api/questions/get-all-questions")
       .then((res) => setQuestions(res.data));
@@ -27,7 +38,7 @@ const Questions: React.FC = (): JSX.Element => {
         <button
           className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           type="button"
-          onClick={() => setModal(true)}
+          onClick={() => setModal(true as boolean)}
         >
           Soru Sor
         </button>
