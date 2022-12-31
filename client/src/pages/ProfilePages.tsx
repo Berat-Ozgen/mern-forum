@@ -55,11 +55,22 @@ const ProfilePages: React.FC = (): JSX.Element => {
     }
   }, []);
 
+  const deletePost: {
+    userId: string;
+  } = {
+    userId: user._id,
+  };
+
   const handleDelete = async (id: string) => {
-    console.log(id);
-    // await axios
-    //   .delete(`http://localhost:8000/api/questions/delete-post/${id}`)
-    //   .then((res) => console.log(res.data));
+    await axios
+      .delete(`http://localhost:8000/api/questions/delete-post/${id}`, {
+        data: {
+          deletePost,
+        },
+      })
+      .then((res) => {
+        res.status == 200 && window.location.reload();
+      });
   };
 
   return (
