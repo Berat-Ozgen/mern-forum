@@ -3,6 +3,7 @@ import QuestionsCont from "../components/question";
 import AuthContext from "../context/authContext";
 import AskQuestion from "../components/askquestion/AskQuestion";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 interface IRecord {
   createdAt: string;
@@ -19,6 +20,7 @@ const Questions: React.FC = (): JSX.Element => {
   const { user, setUser } = useContext(AuthContext);
   const [modal, setModal] = useState<boolean>(false);
   const [questions, setQuestions] = useState<IRecord[]>([]);
+  const navigate = useNavigate();
 
   const allQuestions = async (): Promise<void> => {
     await axios
@@ -47,6 +49,12 @@ const Questions: React.FC = (): JSX.Element => {
         res.status == 200 && window.location.reload();
       });
   };
+
+  const handlePagePost = (id: string) => {
+    navigate(`questionpage/${id}`);
+    console.log(id);
+  };
+
   return (
     <div className="p-6   w-full h-screen flex flex-col flex-nowrap items-center overflow-auto bg-gray-900">
       <div className="flex w-full  mb-4 justify-between">
@@ -63,6 +71,7 @@ const Questions: React.FC = (): JSX.Element => {
       <div className="w-full h-full outline-hidden">
         {questions?.map((item) => (
           <QuestionsCont
+            handlePagePost={handlePagePost}
             handleDelete={handleDelete}
             id={item._id}
             userId={item.userId}

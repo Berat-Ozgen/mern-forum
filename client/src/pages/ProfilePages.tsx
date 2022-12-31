@@ -71,6 +71,10 @@ const ProfilePages: React.FC = (): JSX.Element => {
       });
   };
 
+  const handlePagePost = () => {
+    console.log("deneme");
+  };
+
   return (
     <div className="w-full flex flex-col bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-1 flex-col justify-evenly items-center">
@@ -92,6 +96,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
         {usersPosts?.length > 0 ? (
           usersPosts?.map((item: any) => (
             <QuestionsCont
+              handlePagePost={handlePagePost}
               name={item.username}
               img={item.img || "https://picsum.photos/id/237/200/300"}
               question={item.des}

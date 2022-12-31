@@ -10,6 +10,7 @@ interface Iprops {
   userId: string;
   id: string;
   handleDelete(id: string): void;
+  handlePagePost(id: string): any;
 }
 
 const QuestionsCont: React.FC<Iprops> = ({
@@ -19,11 +20,15 @@ const QuestionsCont: React.FC<Iprops> = ({
   userId,
   id,
   handleDelete,
+  handlePagePost,
 }): JSX.Element => {
   const { user, setUser } = useContext(AuthContext);
 
   return (
-    <div className="relative flex items-center m-6 border outline-hidden border-cyan-700 w-full  md:w-4/5 lg:w-4/4 xl:w-3/3 h-32">
+    <div
+      onClick={() => handlePagePost(id)}
+      className="relative flex items-center m-6 border outline-hidden border-cyan-700 w-full  md:w-4/5 lg:w-4/4 xl:w-3/3 h-32"
+    >
       <div className="absolute left-[96%] top-1">
         {user._id === userId && (
           <BsThreeDots
@@ -33,7 +38,7 @@ const QuestionsCont: React.FC<Iprops> = ({
           />
         )}
       </div>
-      <div className="flex h-full   justify-center flex-col items-center md:flex-col  md:items-center flex-[1]">
+      <div className="flex h-full justify-center flex-col items-center md:flex-col  md:items-center flex-[1]">
         <div>
           <img className="w-10 h-10 rounded-full" src={img} />
         </div>
