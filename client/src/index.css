@@ -1,6 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Amatic+SC:wght@700&family=Chakra+Petch:wght@500&family=Noto+Sans+JP&family=Rubik+Bubbles&display=swap");
+.text-rubik-bubbles {
+  font-family: "Chakra Petch", sans-serif;
+}
 root {
   height: 100%;
 }

@@ -26,7 +26,7 @@ interface IUsersPost {
 
 const ProfilePages: React.FC = (): JSX.Element => {
   const [aUsers, setAUsers] = useState<User>();
-  const [usersPosts, setUsersPosts] = useState<IUsersPost[]>();
+  const [usersPosts, setUsersPosts] = useState<IUsersPost[]>([]);
 
   const { user } = useContext(AuthContext);
 
@@ -44,15 +44,13 @@ const ProfilePages: React.FC = (): JSX.Element => {
         `http://localhost:8000/api/questions/get-usersposts?username=${user.username}`
       )
       .then((res) => {
-        setUsersPosts(res.data as IUsersPost[]);
+        setUsersPosts(res.data);
       });
   };
 
   useEffect(() => {
-    if (aUsers || usersPosts === undefined) {
-      getAUsers();
-      getAUsersPosts();
-    }
+    getAUsers();
+    getAUsersPosts();
   }, []);
 
   const deletePost: {
@@ -83,23 +81,30 @@ const ProfilePages: React.FC = (): JSX.Element => {
             alt="Default avatar"
           />
         </div>
-        <div className="text-green-200 text-4xl">{aUsers?.username}</div>
+        <div className="text-green-200 text-rubik-bubbles text-4xl">
+          {aUsers?.username.toUpperCase()}
+        </div>
         <div className="text-green-200 text-lg">
           Türkiyede yaşıyorum javascirpt react typescript ile ugraşıyorum
         </div>
       </div>
       <div className="flex flex-1 flex-col  items-center  justify-evenly">
-        {usersPosts?.map((item: any) => (
-          <QuestionsCont
-            handleDelete={handleDelete}
-            id={item._id}
-            userId={item.userId}
-            name={item.username}
-            key={item.createdAt}
-            img={item.img || "https://picsum.photos/id/237/200/300"}
-            question={item.des}
-          />
-        ))}
+        {usersPosts?.length > 0 ? (
+          usersPosts?.map((item: any) => (
+            <QuestionsCont
+              name={item.username}
+              img={item.img || "https://picsum.photos/id/237/200/300"}
+              question={item.des}
+              userId={item.userId}
+              id={item._id}
+              handleDelete={handleDelete}
+            />
+          ))
+        ) : (
+          <div className="text-6xl text-gray-500  w-full flex items-center justify-center">
+            Hiç bir soru sormamışsın
+          </div>
+        )}
       </div>
       <div className="flex flex-1">3</div>
     </div>

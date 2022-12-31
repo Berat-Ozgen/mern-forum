@@ -1,6 +1,8 @@
 import React from "react";
 import { SlHome, SlLike, SlPeople } from "react-icons/sl";
 import { MdTrendingUp } from "react-icons/md";
+import { CgProfile } from "react-icons/cg";
+import { Link } from "react-router-dom";
 
 const Sidebar: React.FC = (): JSX.Element => {
   return (
@@ -18,10 +20,13 @@ const Sidebar: React.FC = (): JSX.Element => {
         </div>
         <ul className="space-y-2">
           <li>
-            <div className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 mb-5">
+            <Link
+              to={"/"}
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 mb-5"
+            >
               <SlHome size={20} />
               <span className="ml-3">Anasayfa </span>
-            </div>
+            </Link>
           </li>
           <li>
             <div className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 mb-5">
@@ -44,6 +49,15 @@ const Sidebar: React.FC = (): JSX.Element => {
               <MdTrendingUp size={20} />
               <span className="flex-1 ml-3 whitespace-nowrap">Trendler</span>
             </div>
+          </li>
+          <li>
+            <Link
+              to={"/profile"}
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 mb-5"
+            >
+              <CgProfile size={20} />
+              <span className="flex-1 ml-3 whitespace-nowrap">Profile</span>
+            </Link>
           </li>
         </ul>
       </div>
