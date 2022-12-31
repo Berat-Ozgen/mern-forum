@@ -7,21 +7,31 @@ interface Iprops {
   name: string;
   img: string;
   question: string;
+  userId: string;
   id: string;
+  handleDelete(id: string): void;
 }
 
 const QuestionsCont: React.FC<Iprops> = ({
   name,
   img,
   question,
+  userId,
   id,
+  handleDelete,
 }): JSX.Element => {
   const { user, setUser } = useContext(AuthContext);
 
   return (
-    <div className="relative flex items-center m-6 border border-cyan-700 w-full md:w-4/5 lg:w-3/4 xl:w-2/3 h-32">
+    <div className="relative flex items-center m-6 border outline-hidden border-cyan-700 w-full  md:w-4/5 lg:w-4/4 xl:w-3/3 h-32">
       <div className="absolute left-[96%] top-1">
-        {user._id === id && <BsThreeDots size={30} color={"silver"} />}
+        {user._id === userId && (
+          <BsThreeDots
+            onClick={() => handleDelete(id)}
+            size={30}
+            color={"silver"}
+          />
+        )}
       </div>
       <div className="flex h-full   justify-center flex-col items-center md:flex-col  md:items-center flex-[1]">
         <div>

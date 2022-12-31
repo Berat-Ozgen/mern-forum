@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import QuestionsCont from "../components/question";
-import { fakeData } from "../data";
 import AuthContext from "../context/authContext";
 import AskQuestion from "../components/askquestion/AskQuestion";
 import axios from "axios";
@@ -31,9 +30,26 @@ const Questions: React.FC = (): JSX.Element => {
     allQuestions();
   }, []);
 
+  const deletePost: {
+    userId: string;
+  } = {
+    userId: user._id,
+  };
+
+  const handleDelete = async (id: string) => {
+    await axios
+      .delete(`http://localhost:8000/api/questions/delete-post/${id}`, {
+        data: {
+          deletePost,
+        },
+      })
+      .then((res) => {
+        res.status == 200 && window.location.reload();
+      });
+  };
   return (
-    <div className="p-6 w-full h-screen flex flex-col flex-nowrap items-center overflow-auto bg-gray-900">
-      <div className="flex w-full mb-4 justify-between">
+    <div className="p-6   w-full h-screen flex flex-col flex-nowrap items-center overflow-auto bg-gray-900">
+      <div className="flex w-full  mb-4 justify-between">
         <div className="text-white text-3xl">Sorular</div>{" "}
         <button
           className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -44,17 +60,21 @@ const Questions: React.FC = (): JSX.Element => {
         </button>
         {modal && <AskQuestion setModal={setModal} />}
       </div>
-      {questions?.map((item) => (
-        <QuestionsCont
-          id={item.userId}
-          name={item.username}
-          key={item.createdAt}
-          img={item.img || "https://picsum.photos/id/237/200/300"}
-          question={item.des}
-        />
-      ))}
+      <div className="w-full h-full outline-hidden">
+        {questions?.map((item) => (
+          <QuestionsCont
+            handleDelete={handleDelete}
+            id={item._id}
+            userId={item.userId}
+            name={item.username}
+            key={item.createdAt}
+            img={item.img || "https://picsum.photos/id/237/200/300"}
+            question={item.des}
+          />
+        ))}
+      </div>
     </div>
   );
 };
-
+// /api/questions
 export default Questions;

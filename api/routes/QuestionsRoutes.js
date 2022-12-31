@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Questions = require("../models/Questions.js");
 
+// yeni bir soru oluşturma
 router.post("/create-questions", async (req, res) => {
   try {
     const soru = await new Questions(req.body);
@@ -21,6 +22,7 @@ router.get("/get-all-questions", async (req, res) => {
   }
 });
 
+// kullanıcının sorularını getirme
 router.get("/get-usersposts", async (req, res) => {
   const userId = req.query.userId;
   const username = req.query.username;
@@ -31,4 +33,20 @@ router.get("/get-usersposts", async (req, res) => {
     res.status(500).json("bir hata oluştu");
   }
 });
+
+// soru silmek
+router.delete("/delete-post/:id", async (req, res) => {
+  try {
+    const post = await Questions.findById(req.params.id);
+    if (post.userId === req.body.deletePost.userId) {
+      await post.deleteOne();
+      res.status(200).json("Başarılı bir şekilde silindi");
+    } else {
+      res.status(403).json("Post Silinirken bir hata oluştu");
+    }
+  } catch (err) {
+    res.status(500).json("post catch");
+  }
+});
+
 module.exports = router;

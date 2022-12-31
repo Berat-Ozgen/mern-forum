@@ -44,7 +44,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
         `http://localhost:8000/api/questions/get-usersposts?username=${user.username}`
       )
       .then((res) => {
-        setUsersPosts(res.data);
+        setUsersPosts(res.data as IUsersPost[]);
       });
   };
 
@@ -54,6 +54,13 @@ const ProfilePages: React.FC = (): JSX.Element => {
       getAUsersPosts();
     }
   }, []);
+
+  const handleDelete = async (id: string) => {
+    console.log(id);
+    // await axios
+    //   .delete(`http://localhost:8000/api/questions/delete-post/${id}`)
+    //   .then((res) => console.log(res.data));
+  };
 
   return (
     <div className="w-full flex flex-col bg-gray-50 dark:bg-gray-900">
@@ -73,7 +80,9 @@ const ProfilePages: React.FC = (): JSX.Element => {
       <div className="flex flex-1 flex-col  items-center  justify-evenly">
         {usersPosts?.map((item: any) => (
           <QuestionsCont
-            id={item.userId}
+            handleDelete={handleDelete}
+            id={item._id}
+            userId={item.userId}
             name={item.username}
             key={item.createdAt}
             img={item.img || "https://picsum.photos/id/237/200/300"}
