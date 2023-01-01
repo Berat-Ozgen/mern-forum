@@ -10,8 +10,7 @@ interface Iprops {
   userId: string;
   id: string;
   handleDelete(id: string): void;
-  handlePagePost(id: string): any;
-  singlePage?: boolean;
+  handlePagePost?(id: string): void;
 }
 
 const QuestionsCont: React.FC<Iprops> = ({
@@ -27,7 +26,11 @@ const QuestionsCont: React.FC<Iprops> = ({
 
   return (
     <div
-      onClick={() => handlePagePost(id)}
+      onClick={() => {
+        if (handlePagePost) {
+          handlePagePost(id);
+        }
+      }}
       className="relative flex items-center m-6 outline-hidden border border-cyan-700 w-full  md:w-4/5 lg:w-4/4 xl:w-3/3 h-32"
     >
       <div className="absolute left-[96%] top-1">

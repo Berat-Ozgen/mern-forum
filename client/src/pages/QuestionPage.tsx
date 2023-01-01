@@ -8,10 +8,6 @@ import QuestionComments from "../components/questionComments/QuestionComments";
 const QuestionPage: React.FC = (): JSX.Element => {
   const paramas = useParams();
 
-  const handlePagePost = () => {
-    console.log("deneme");
-  };
-
   const deneme = () => {
     console.log("deneme");
   };
@@ -34,7 +30,6 @@ const QuestionPage: React.FC = (): JSX.Element => {
         </div>
         <div className="w-full flex items-center justify-center text-4xl">
           <QuestionsCont
-            handlePagePost={handlePagePost}
             key={"2"}
             userId={"213"}
             handleDelete={deneme}
