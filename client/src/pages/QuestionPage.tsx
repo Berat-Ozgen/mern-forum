@@ -1,22 +1,42 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Params, useParams } from "react-router-dom";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
 
+interface ISinglePost {
+  createdAt: string;
+  des: string;
+  updatedAt: string;
+  userId: string;
+  username?: string;
+  __v?: number;
+  _id?: string;
+}
+
 const QuestionPage: React.FC = (): JSX.Element => {
   const paramas = useParams();
+
+  const [singleQuestionState, setSingleQuestionState] = useState<ISinglePost>();
+
+  // const [questionAnswersState, setQuestionAnswersState] = useState([]);
 
   const deneme = () => {
     console.log("deneme");
   };
 
-  const singleQuestion = async (paramas: Params) => {
+  const createQuestionAnswers = async () => {
+    await axios.post;
+  };
+
+  const singleQuestion = async (paramas: Params): Promise<void> => {
     await axios
       .get(`http://localhost:8000/api/questions/get-singlepost/${paramas}`)
-      .then((res) => console.log(res));
+      .then((res) => setSingleQuestionState(res.data));
   };
+
+  console.log(singleQuestionState);
 
   useEffect(() => {
     singleQuestion(paramas.id as any);
@@ -30,13 +50,12 @@ const QuestionPage: React.FC = (): JSX.Element => {
         </div>
         <div className="w-full flex items-center justify-center text-4xl">
           <QuestionsCont
-            key={"2"}
-            userId={"213"}
+            userId={singleQuestionState?.userId as string}
             handleDelete={deneme}
-            id={"12"}
-            img={"ds"}
-            name={"berat"}
-            question={"kşfdkpfdspkı"}
+            id={singleQuestionState?._id as string}
+            img={"https://picsum.photos/200/305"}
+            name={singleQuestionState?.username as string}
+            question={singleQuestionState?.des as string}
           />
         </div>
       </div>
