@@ -1,12 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-interface IRegisterPost {
-  username: string;
-  email: string;
-  password: string;
-}
+import { IRegisterPost } from "../models/Register.models";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState<IRegisterPost["username"]>("");

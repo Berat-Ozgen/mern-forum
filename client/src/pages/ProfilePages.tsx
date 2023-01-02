@@ -1,28 +1,8 @@
-import axios, { AxiosHeaders } from "axios";
+import axios from "axios";
 import { useEffect, useContext, useState } from "react";
 import QuestionsCont from "../components/question";
 import AuthContext from "../context/authContext";
-
-interface User {
-  createdAt: string;
-  email: string;
-  images: string;
-  password: string;
-  updatedAt: string;
-  username: string;
-  __v: number;
-  _id: string;
-}
-
-interface IUsersPost {
-  createdAt: string;
-  des: string;
-  updatedAt: string;
-  userId: string;
-  username: string;
-  __v: number;
-  _id: string;
-}
+import { IUsersPost, User } from "../models/ProfilePages.models";
 
 const ProfilePages: React.FC = (): JSX.Element => {
   const [aUsers, setAUsers] = useState<User>();
@@ -67,7 +47,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
         },
       })
       .then((res) => {
-        res.status == 200 && window.location.reload();
+        res.status === 200 && window.location.reload();
       });
   };
 

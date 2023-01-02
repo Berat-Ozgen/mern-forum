@@ -2,18 +2,9 @@ import { useContext } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import AuthContext from "../../context/authContext";
+import { IQuestionProps } from "../../models/Question";
 
-interface Iprops {
-  name: string;
-  img: string;
-  question: string;
-  userId: string;
-  id: string;
-  handleDelete(id: string): void;
-  handlePagePost?(id: string): void;
-}
-
-const QuestionsCont: React.FC<Iprops> = ({
+const QuestionsCont: React.FC<IQuestionProps> = ({
   name,
   img,
   question,
@@ -22,7 +13,7 @@ const QuestionsCont: React.FC<Iprops> = ({
   handleDelete,
   handlePagePost,
 }): JSX.Element => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   return (
     <div

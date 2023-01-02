@@ -4,20 +4,10 @@ import AuthContext from "../context/authContext";
 import AskQuestion from "../components/askquestion/AskQuestion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-interface IRecord {
-  createdAt: string;
-  des: string;
-  updatedAt: string;
-  userId: string;
-  username: string;
-  __v: number;
-  _id: string;
-  img?: string;
-}
+import { IRecord } from "../models/Questions.models";
 
 const Questions: React.FC = (): JSX.Element => {
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const [modal, setModal] = useState<boolean>(false);
   const [questions, setQuestions] = useState<IRecord[]>([]);
   const navigate = useNavigate();

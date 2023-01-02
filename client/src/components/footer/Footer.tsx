@@ -1,9 +1,4 @@
-import React, { useContext } from "react";
-import AuthContext from "../../context/authContext";
-
-const Footer: React.FC = (): JSX.Element => {
-  const { user, setUser } = useContext(AuthContext);
-
+const Footer = () => {
   return (
     <footer className="p-4 bg-white border-t-2 border-gray-700 shadow md:px-6 md:py-8 dark:bg-gray-900">
       <div className="flex flex-col items-center md:flex-row md:items-start md:justify-between">

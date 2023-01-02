@@ -4,16 +4,7 @@ import { Params, useParams } from "react-router-dom";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
-
-interface ISinglePost {
-  createdAt: string;
-  des: string;
-  updatedAt: string;
-  userId: string;
-  username?: string;
-  __v?: number;
-  _id?: string;
-}
+import { ISinglePost } from "../models/QuestionPage.models";
 
 const QuestionPage: React.FC = (): JSX.Element => {
   const paramas = useParams();
@@ -24,10 +15,6 @@ const QuestionPage: React.FC = (): JSX.Element => {
 
   const deneme = () => {
     console.log("deneme");
-  };
-
-  const createQuestionAnswers = async () => {
-    await axios.post;
   };
 
   const singleQuestion = async (paramas: Params): Promise<void> => {

@@ -4,17 +4,8 @@ import { ImExit } from "react-icons/im";
 import AuthContext from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { IgetAllUsers } from "../../models/Navbar.models";
 
-interface IgetAllUsers {
-  _id: string;
-  username: string;
-  email: string;
-  password: string;
-  images: string;
-  createdAt: string;
-  updatedAt: string;
-  __v: number;
-}
 const Navbar: React.FC = () => {
   const [usernamee, setUserName] = useState("" as string);
   const [allUsers, setAllUsers] = useState<IgetAllUsers[]>([]);

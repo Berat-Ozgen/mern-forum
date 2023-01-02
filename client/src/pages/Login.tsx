@@ -2,26 +2,13 @@ import axios, { AxiosHeaders } from "axios";
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/authContext";
+import { LoginData } from "../models/Login.models";
 
 const Login: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const { user, setUser } = useContext(AuthContext);
-
-  interface IResponse {
-    config: object;
-    data: object;
-    headers: AxiosHeaders;
-    request: XMLHttpRequest;
-    status: number;
-    statusText: string;
-  }
-
-  interface LoginData {
-    email: string;
-    password: string;
-  }
 
   const loginData: LoginData = {
     email: email,
@@ -30,10 +17,10 @@ const Login: React.FC = (): JSX.Element => {
 
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
-  ): Promise<any> => {
+  ): Promise<void> => {
     e.preventDefault();
     axios
-      .post<IResponse>("http://localhost:8000/api/auth/login", loginData)
+      .post("http://localhost:8000/api/auth/login", loginData)
       .then((res: any): void => {
         if (res.status === 200) {
           setUser(res.data);

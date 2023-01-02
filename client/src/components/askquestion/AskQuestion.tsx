@@ -1,20 +1,14 @@
 import { useContext, useState } from "react";
 import Axios from "axios";
 import AuthContext from "../../context/authContext";
-
-type AskQuestionProps = {
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-interface QuestionsPost {
-  userId: string;
-  username: string;
-  des: string;
-}
+import {
+  AskQuestionProps,
+  QuestionsPost,
+} from "../../models/AskQuestion.models";
 
 const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
   const [des, setDes] = useState("" as string);
-  const { user, setUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const quesPost: QuestionsPost = {
     userId: user._id,
