@@ -13,10 +13,10 @@ const QuestionComments: React.FC = (): JSX.Element => {
         </div>
         <div className=" flex justify-evenly items-center  h-full flex-[1]">
           <div className="flex items-center justify-center w-full h-full">
-            <AiOutlineLike size={35} color={"green"} />
+            <AiOutlineLike size={30 as number} color={"green" as string} />
           </div>
           <div className="flex items-center justify-center w-full h-full">
-            <AiOutlineDislike size={35} color={"red"} />
+            <AiOutlineDislike size={30 as number} color={"#d32f2f" as string} />
           </div>
         </div>
       </div>

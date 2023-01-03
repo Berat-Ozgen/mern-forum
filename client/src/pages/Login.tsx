@@ -1,4 +1,4 @@
-import axios, { AxiosHeaders } from "axios";
+import axios from "axios";
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthContext from "../context/authContext";
@@ -8,7 +8,7 @@ const Login: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
-  const { user, setUser } = useContext(AuthContext);
+  const { setUser } = useContext(AuthContext);
 
   const loginData: LoginData = {
     email: email,
@@ -112,7 +112,7 @@ const Login: React.FC = (): JSX.Element => {
                 Sign in
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                Don’t have an account yet?{" "}
+                Don’t have an account yet?
                 <Link
                   to="/register"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
