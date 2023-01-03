@@ -21,7 +21,7 @@ const Login: React.FC = (): JSX.Element => {
     e.preventDefault();
     axios
       .post("http://localhost:8000/api/auth/login", loginData)
-      .then((res: any): void => {
+      .then((res): void => {
         if (res.status === 200) {
           setUser(res.data);
           navigate("/");

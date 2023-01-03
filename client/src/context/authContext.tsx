@@ -1,9 +1,10 @@
 import { createContext, useEffect, useState } from "react";
+import { IAuthUser } from "../models/AuthContext.models";
 
 const AuthContext = createContext<any>({});
 
 export const AuthContextProvider = ({ children }: any) => {
-  const [user, setUser] = useState<any>(() => {
+  const [user, setUser] = useState<IAuthUser>(() => {
     const userData = localStorage.getItem("users");
     return userData ? JSON.parse(userData) : false;
   });
@@ -11,6 +12,8 @@ export const AuthContextProvider = ({ children }: any) => {
   useEffect(() => {
     localStorage.setItem("users", JSON.stringify(user));
   }, [user]);
+
+  console.log(user);
 
   const values = {
     user,

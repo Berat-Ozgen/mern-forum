@@ -74,7 +74,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
       </div>
       <div className="flex flex-1 flex-col  items-center  justify-evenly">
         {usersPosts?.length > 0 ? (
-          usersPosts?.map((item: any) => (
+          usersPosts?.map((item) => (
             <QuestionsCont
               handlePagePost={handlePagePost}
               name={item.username}

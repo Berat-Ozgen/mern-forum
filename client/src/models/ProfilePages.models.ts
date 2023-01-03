@@ -13,6 +13,7 @@ export interface IUsersPost {
     createdAt: string;
     des: string;
     updatedAt: string;
+    img:string
     userId: string;
     username: string;
     __v: number;

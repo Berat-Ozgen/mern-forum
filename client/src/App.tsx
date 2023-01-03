@@ -9,8 +9,12 @@ import Login from "./pages/Login";
 import ProfilePages from "./pages/ProfilePages";
 import { AuthContextProvider } from "./context/authContext";
 import QuestionPage from "./pages/QuestionPage";
+import useBrowser from "./hook/useBrowser";
 
 const App: React.FC = (): JSX.Element => {
+  const browserName = useBrowser();
+  console.log(browserName);
+
   return (
     <AuthContextProvider>
       <div className="h-full">
