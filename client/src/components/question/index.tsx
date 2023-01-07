@@ -3,6 +3,7 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import AuthContext from "../../context/authContext";
 import { IQuestionProps } from "../../models/Question";
+import { useNavigate } from "react-router-dom";
 
 const QuestionsCont: React.FC<IQuestionProps> = ({
   name,
@@ -14,6 +15,7 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
   handlePagePost,
 }): JSX.Element => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   return (
     <div
@@ -35,7 +37,11 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
       </div>
       <div className="flex h-full justify-center flex-col items-center md:flex-col  md:items-center flex-[1]">
         <div>
-          <img className="w-10 h-10 rounded-full" src={img} />
+          <img
+            className="w-10 h-10 rounded-full"
+            src={img}
+            alt="profileImage"
+          />
         </div>
         <div className="text-green-300">{name}</div>
       </div>

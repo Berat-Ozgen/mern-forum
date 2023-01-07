@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { loginPost } from "../apiFetch/loginFetch";
 import AuthContext from "../context/authContext";
 import { LoginData } from "../models/Login.models";
 
@@ -19,14 +19,12 @@ const Login: React.FC = (): JSX.Element => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8000/api/auth/login", loginData)
-      .then((res): void => {
-        if (res.status === 200) {
-          setUser(res.data);
-          navigate("/");
-        }
-      });
+    loginPost(loginData).then((res): void => {
+      if (res.status === 200) {
+        setUser(res.data);
+        navigate("/");
+      }
+    });
   };
 
   return (
