@@ -1,5 +1,10 @@
 import axios from "axios";
 import { useEffect, useContext, useState } from "react";
+import {
+  apiDeleteAPost,
+  apiGetAUsers,
+  apiGetAUsersPosts,
+} from "../apiFetch/profilePagesFetch";
 import QuestionsCont from "../components/question";
 import AuthContext from "../context/authContext";
 import { IUsersPost, User } from "../models/ProfilePages.models";
@@ -11,27 +16,16 @@ const ProfilePages: React.FC = (): JSX.Element => {
   const { user } = useContext(AuthContext);
 
   const getAUsers = async (): Promise<void> => {
-    await axios
-      .get(`http://localhost:8000/api/users/get-user?username=${user.username}`)
-      .then((res) => {
-        setAUsers(res.data);
-      });
+    apiGetAUsers(user.username).then((res) => {
+      setAUsers(res.data);
+    });
   };
 
   const getAUsersPosts = async (): Promise<void> => {
-    await axios
-      .get(
-        `http://localhost:8000/api/questions/get-usersposts?username=${user.username}`
-      )
-      .then((res) => {
-        setUsersPosts(res.data);
-      });
+    apiGetAUsersPosts(user.username).then((res) => {
+      setUsersPosts(res.data);
+    });
   };
-
-  useEffect(() => {
-    getAUsers();
-    getAUsersPosts();
-  }, []);
 
   const deletePost: {
     userId: string;
@@ -40,16 +34,17 @@ const ProfilePages: React.FC = (): JSX.Element => {
   };
 
   const handleDelete = async (id: string) => {
-    await axios
-      .delete(`http://localhost:8000/api/questions/delete-post/${id}`, {
-        data: {
-          deletePost,
-        },
-      })
-      .then((res) => {
-        res.status === 200 && window.location.reload();
-      });
+    apiDeleteAPost(deletePost, id).then((res) => {
+      res.status === 200
+        ? window.location.reload()
+        : console.log("başarısız oldu");
+    });
   };
+
+  useEffect(() => {
+    getAUsers();
+    getAUsersPosts();
+  }, []);
 
   const handlePagePost = () => {
     console.log("deneme");
