@@ -5,6 +5,10 @@ import AskQuestion from "../components/askquestion/AskQuestion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IRecord } from "../models/Questions.models";
+import {
+  allQuestionsFecthData,
+  handleDeleteFecthData,
+} from "../apiFetch/questionsFetch";
 
 const Questions: React.FC = (): JSX.Element => {
   const { user } = useContext(AuthContext);
@@ -13,9 +17,7 @@ const Questions: React.FC = (): JSX.Element => {
   const navigate = useNavigate();
 
   const allQuestions = async (): Promise<void> => {
-    await axios
-      .get("http://localhost:8000/api/questions/get-all-questions")
-      .then((res) => setQuestions(res.data));
+    await allQuestionsFecthData().then((res) => setQuestions(res.data));
   };
 
   useEffect(() => {
@@ -29,15 +31,10 @@ const Questions: React.FC = (): JSX.Element => {
   };
 
   const handleDelete = async (id: string) => {
-    await axios
-      .delete(`http://localhost:8000/api/questions/delete-post/${id}`, {
-        data: {
-          deletePost,
-        },
-      })
-      .then((res) => {
-        res.status == 200 && window.location.reload();
-      });
+    await axios;
+    handleDeleteFecthData(id, deletePost).then((res) => {
+      res.status === 200 && window.location.reload();
+    });
   };
 
   const handlePagePost = (id: string) => {
