@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { Params, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
 import {
   questionPageHandleDeletedFetchApi,
   singleQuestionFetchApi,
@@ -26,13 +27,14 @@ const QuestionPage: React.FC = (): JSX.Element => {
 
   const questionPageHandleDeleted = (id: string): void => {
     questionPageHandleDeletedFetchApi(id, deletePost).then((res) => {
-      if (res.status !== 200) alert("silme işlemi başarısız !");
+      if (res.status === 200) alert("silme işlemi başarılı !");
     });
   };
 
   const singleQuestion = async (paramas: Params): Promise<void> => {
     await singleQuestionFetchApi(paramas).then((res) => {
       setSingleQuestionState(res.data);
+      console.log("çalıştı");
     });
   };
 
