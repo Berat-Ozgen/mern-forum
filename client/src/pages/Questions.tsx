@@ -31,8 +31,7 @@ const Questions: React.FC = (): JSX.Element => {
   };
 
   const handleDelete = async (id: string) => {
-    await axios;
-    handleDeleteFecthData(id, deletePost).then((res) => {
+    await handleDeleteFecthData(id, deletePost).then((res) => {
       res.status === 200 && window.location.reload();
     });
   };

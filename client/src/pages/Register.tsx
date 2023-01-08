@@ -1,6 +1,6 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { registerFechtPost } from "../apiFetch/registerFetch";
 import { IRegisterPost } from "../models/Register.models";
 
 const Register: React.FC = () => {
@@ -19,8 +19,7 @@ const Register: React.FC = () => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    axios
-      .post("http://localhost:8000/api/auth/register", registerPost)
+    await registerFechtPost(registerPost)
       .then((res) => console.log(res.data))
       .finally(() => navigate("/login"));
   };
