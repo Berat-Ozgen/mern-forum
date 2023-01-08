@@ -1,26 +1,39 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Params, useParams } from "react-router-dom";
+import {
+  questionPageHandleDeletedFetchApi,
+  singleQuestionFetchApi,
+} from "../apiFetch/questionPageFetch";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
+import AuthContext from "../context/authContext";
 import { ISinglePost } from "../models/QuestionPage.models";
 
 const QuestionPage: React.FC = (): JSX.Element => {
+  const { user } = useContext(AuthContext);
   const paramas = useParams();
 
   const [singleQuestionState, setSingleQuestionState] = useState<ISinglePost>();
 
   // const [questionAnswersState, setQuestionAnswersState] = useState([]);
 
-  const deneme = () => {
-    console.log("deneme");
+  const deletePost: {
+    userId: string;
+  } = {
+    userId: user._id,
+  };
+
+  const questionPageHandleDeleted = (id: string): void => {
+    questionPageHandleDeletedFetchApi(id, deletePost).then((res) => {
+      if (res.status !== 200) alert("silme işlemi başarısız !");
+    });
   };
 
   const singleQuestion = async (paramas: Params): Promise<void> => {
-    await axios
-      .get(`http://localhost:8000/api/questions/get-singlepost/${paramas}`)
-      .then((res) => setSingleQuestionState(res.data));
+    await singleQuestionFetchApi(paramas).then((res) => {
+      setSingleQuestionState(res.data);
+    });
   };
 
   console.log(singleQuestionState);
@@ -38,7 +51,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
         <div className="w-full flex items-center justify-center text-4xl">
           <QuestionsCont
             userId={singleQuestionState?.userId as string}
-            handleDelete={deneme}
+            handleDelete={questionPageHandleDeleted}
             id={singleQuestionState?._id as string}
             img={"https://picsum.photos/200/305"}
             name={singleQuestionState?.username as string}
