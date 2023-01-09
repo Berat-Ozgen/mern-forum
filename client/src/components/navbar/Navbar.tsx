@@ -1,17 +1,29 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { MdOutlineNotifications } from "react-icons/md";
 import { ImExit } from "react-icons/im";
 import AuthContext from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IgetAllUsers } from "../../models/Navbar.models";
+import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
+import { toggleTheme } from "../../reduxSlice/themeSlice";
+import { LoginUsersPost } from "../../reduxSlice/fetchSlice/loginUserSlice";
 
 const Navbar: React.FC = () => {
   const [usernamee, setUserName] = useState("" as string);
   const [allUsers, setAllUsers] = useState<IgetAllUsers[]>([]);
+  const { darkMode } = useAppSelector((state) => state.darkModeSlice);
+  const dispatch = useAppDispatch();
+
+  console.log(darkMode);
 
   const { user, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    dispatch(LoginUsersPost());
+    console.log("berat");
+  }, []);
 
   const handleOut = () => {
     localStorage.removeItem("users");
@@ -33,6 +45,10 @@ const Navbar: React.FC = () => {
     item.username.startsWith(usernamee)
   );
 
+  const ontoggle = () => {
+    dispatch(toggleTheme());
+  };
+
   return (
     <div className="flex justify-around items-center h-16 ali w-full bg-gray-800 border border-black ">
       <div
@@ -41,6 +57,8 @@ const Navbar: React.FC = () => {
       >
         BRTFORM
       </div>
+
+      <div onClick={ontoggle}>oylesine tıkla</div>
 
       <div className="flex flex-[5] justify-center items-center">
         <input

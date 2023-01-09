@@ -8,7 +8,7 @@ import AuthContext from "../../context/authContext";
 const Sidebar: React.FC = (): JSX.Element => {
   const { user } = useContext(AuthContext);
   return (
-    <aside className="w-64 h-full" aria-label="Sidebar">
+    <aside className="w-64 h-full">
       <div className="overflow-y-auto h-screen py-4 px-3 bg-gray-50  dark:bg-gray-800">
         <div className="flex items-center pl-2.5 mb-5">
           <img
