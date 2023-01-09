@@ -34,11 +34,8 @@ const QuestionPage: React.FC = (): JSX.Element => {
   const singleQuestion = async (paramas: Params): Promise<void> => {
     await singleQuestionFetchApi(paramas).then((res) => {
       setSingleQuestionState(res.data);
-      console.log("çalıştı");
     });
   };
-
-  console.log(singleQuestionState);
 
   useEffect(() => {
     singleQuestion(paramas.id as any);

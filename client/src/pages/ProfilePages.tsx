@@ -35,9 +35,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
 
   const handleDelete = async (id: string) => {
     apiDeleteAPost(deletePost, id).then((res) => {
-      res.status === 200
-        ? window.location.reload()
-        : console.log("başarısız oldu");
+      res.status === 200 ? window.location.reload() : alert("başarısız oldu");
     });
   };
 

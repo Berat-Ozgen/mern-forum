@@ -38,7 +38,6 @@ const Questions: React.FC = (): JSX.Element => {
 
   const handlePagePost = (id: string) => {
     navigate(`questionpage/${id}`);
-    console.log(id);
   };
 
   return (
