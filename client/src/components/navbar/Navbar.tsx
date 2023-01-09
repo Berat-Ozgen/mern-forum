@@ -57,17 +57,13 @@ const Navbar: React.FC = () => {
 
       <div className="flex flex-[3] justify-evenly">
         <div>
-          {user ? (
+          {user && (
             <img
               onClick={() => navigate("/profile")}
               className="w-10 h-10 rounded-full"
               src="https://picsum.photos/200/300"
               alt="Rounded avatar"
             />
-          ) : (
-            <div className="text-white text-lg flex items-center justify-center  w-full h-full">
-              Misafir
-            </div>
           )}
         </div>
         <div className="cursor-pointer">
@@ -78,7 +74,7 @@ const Navbar: React.FC = () => {
           ) : (
             <div
               onClick={() => navigate("/register")}
-              className="text-white text-lg flex items-center justify-center  w-full h-full"
+              className="text-white text-lg flex items-center justify-center cursor-pointer hover:text-gray-400  w-full h-full"
             >
               Kayıt ol
             </div>
@@ -95,7 +91,7 @@ const Navbar: React.FC = () => {
           ) : (
             <div
               onClick={() => navigate("/login")}
-              className="text-white text-lg flex items-center justify-center  w-full h-full"
+              className="text-white text-lg flex items-center justify-center cursor-pointer hover:text-gray-400 w-full h-full"
             >
               Giriş yap
             </div>
