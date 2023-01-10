@@ -1,7 +1,5 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { loginPost } from "../apiFetch/loginFetch";
-import AuthContext from "../context/authContext";
 import { LoginData } from "../models/Login.models";
 import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
 import { loginUserPost } from "../reduxSlice/fetchSlice/loginUserSlice";
@@ -10,7 +8,6 @@ const Login: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
-  const { setUser } = useContext(AuthContext);
   const dispatch = useAppDispatch();
   const { userInformation } = useAppSelector((state) => state.usersData);
 
@@ -23,8 +20,7 @@ const Login: React.FC = (): JSX.Element => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-
-    dispatch(loginUserPost(loginData));
+    dispatch(loginUserPost({ loginData, navigate }));
   };
 
   console.log(userInformation);

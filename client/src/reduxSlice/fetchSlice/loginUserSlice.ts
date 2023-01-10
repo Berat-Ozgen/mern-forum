@@ -1,22 +1,25 @@
 import {  createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import { createAxios } from "../../apiFetch/createAxios";
 
 
 
-export const loginUserPost = createAsyncThunk('postData', async (loginData:any) => {
-  const response = await createAxios().post("/api/auth/login", loginData)
+export const loginUserPost = createAsyncThunk('postData', async (a:any) => {
+  const response = await createAxios().post("/api/auth/login", a.loginData).then(res => {
+      if(res.status === 200) {
+        a.navigate("/")
+        return res
+      }
+  })
  
-  return response.data;
+  return response?.data;
 });
 
 
 
-const initialState= {
-   userInformation: []
-}
+const initialState: any= {
+  userInformation: false,
+};
     
-
 
 export const loginUsers = createSlice({
   name: "users",
@@ -25,6 +28,7 @@ export const loginUsers = createSlice({
   extraReducers(builder) {
       builder.addCase(loginUserPost.fulfilled, (state,action) => {
           state.userInformation = action.payload;
+
       })
   },
 });

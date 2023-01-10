@@ -1,26 +1,24 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { MdOutlineNotifications } from "react-icons/md";
 import { ImExit } from "react-icons/im";
-import AuthContext from "../../context/authContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IgetAllUsers } from "../../models/Navbar.models";
 import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
-import { toggleTheme } from "../../reduxSlice/themeSlice";
 
 const Navbar: React.FC = () => {
   const [usernamee, setUserName] = useState("" as string);
   const [allUsers, setAllUsers] = useState<IgetAllUsers[]>([]);
-  const { darkMode } = useAppSelector((state) => state.darkModeSlice);
+  const { userInformation } = useAppSelector((state) => state.usersData);
   const dispatch = useAppDispatch();
 
-  const { user, setUser } = useContext(AuthContext);
+  console.log(userInformation);
+
   const navigate = useNavigate();
 
   const handleOut = () => {
     localStorage.removeItem("users");
     navigate("/login");
-    setUser(false as boolean);
   };
 
   const getAllUsers = async (): Promise<void> => {
@@ -61,7 +59,7 @@ const Navbar: React.FC = () => {
 
       <div className="flex flex-[3] justify-evenly">
         <div>
-          {user && (
+          {userInformation && (
             <img
               onClick={() => navigate("/profile")}
               className="w-10 h-10 rounded-full"
@@ -71,7 +69,7 @@ const Navbar: React.FC = () => {
           )}
         </div>
         <div className="cursor-pointer">
-          {user ? (
+          {userInformation ? (
             <div className="flex items-center justify-center  w-full h-full">
               <MdOutlineNotifications color="grey" size={35} />
             </div>
@@ -85,7 +83,7 @@ const Navbar: React.FC = () => {
           )}
         </div>
         <div>
-          {user ? (
+          {userInformation ? (
             <div
               onClick={handleOut}
               className="flex items-center justify-center  w-full h-full"
