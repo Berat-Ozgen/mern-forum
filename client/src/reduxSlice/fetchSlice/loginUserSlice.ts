@@ -1,34 +1,19 @@
-import { PayloadAction, createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import {  createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { createAxios } from "../../apiFetch/createAxios";
 
-export const LoginUsersPost = createAsyncThunk(
-  "users/postLoginUsers",
-  async (data, thunkApi) => {
-    try {
-      const res = await axios
-        .get("https://jsonplaceholder.typicode.com/todos/1")
-        .then((json) => console.log(json));
-    } catch (error) {
-      console.log("try catch error");
-    }
-  }
-);
 
-interface userDenemeBilgi {
-  userId: number | null;
-  id: number | null;
-  title: string | null;
-  completed: boolean | null;
-}
+
+export const loginUserPost = createAsyncThunk('postData', async (loginData:any) => {
+  const response = await createAxios().post("/api/auth/login", loginData)
+ 
+  return response.data;
+});
+
+
 
 const initialState= {
-    usersData:{
-     userId: null,
-    id: null,
-    title: null,
-    completed: null,
-    }
+   userInformation: []
 }
     
 
@@ -38,8 +23,8 @@ export const loginUsers = createSlice({
   initialState,
   reducers: {},
   extraReducers(builder) {
-      builder.addCase(LoginUsersPost.fulfilled, (state,action:any) => {
-          state.usersData = action.payload;
+      builder.addCase(loginUserPost.fulfilled, (state,action) => {
+          state.userInformation = action.payload;
       })
   },
 });

@@ -3,12 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginPost } from "../apiFetch/loginFetch";
 import AuthContext from "../context/authContext";
 import { LoginData } from "../models/Login.models";
+import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
+import { loginUserPost } from "../reduxSlice/fetchSlice/loginUserSlice";
 
 const Login: React.FC = (): JSX.Element => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
   const { setUser } = useContext(AuthContext);
+  const dispatch = useAppDispatch();
+  const { userInformation } = useAppSelector((state) => state.usersData);
 
   const loginData: LoginData = {
     email: email,
@@ -19,13 +23,11 @@ const Login: React.FC = (): JSX.Element => {
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    loginPost(loginData).then((res): void => {
-      if (res.status === 200) {
-        setUser(res.data);
-        navigate("/");
-      }
-    });
+
+    dispatch(loginUserPost(loginData));
   };
+
+  console.log(userInformation);
 
   return (
     <section className="w-full bg-gray-900">
