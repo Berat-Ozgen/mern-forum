@@ -5,11 +5,13 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { IgetAllUsers } from "../../models/Navbar.models";
 import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
+import { usersExit } from "../../reduxSlice/fetchSlice/loginUserSlice";
 
 const Navbar: React.FC = () => {
   const [usernamee, setUserName] = useState("" as string);
   const [allUsers, setAllUsers] = useState<IgetAllUsers[]>([]);
   const { userInformation } = useAppSelector((state) => state.usersData);
+
   const dispatch = useAppDispatch();
 
   console.log(userInformation);
@@ -17,7 +19,7 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
 
   const handleOut = () => {
-    localStorage.removeItem("user");
+    dispatch(usersExit(""));
     navigate("/login");
   };
 

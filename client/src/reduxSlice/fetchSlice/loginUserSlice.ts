@@ -44,6 +44,7 @@ export const loginUsers = createSlice({
   reducers: {
     usersExit: (state,action) => {
         localStorage.removeItem("user");
+        state.userInformation = false;
     }
   },
   extraReducers(builder) {
