@@ -26,16 +26,17 @@ interface IInitialState {
 }
 
 interface IState {
-  userInformation: IInitialState | boolean;
+  userInformation: IInitialState | null;
 }
 
 
 const userData = localStorage.getItem("user");
-const initialState: IState= {
+
+const initialState: IState = {
   userInformation: userData ? JSON.parse(userData) : null,
 };
 
-
+ 
     
 
 export const loginUsers = createSlice({
@@ -44,7 +45,7 @@ export const loginUsers = createSlice({
   reducers: {
     usersExit: (state,action) => {
         localStorage.removeItem("user");
-        state.userInformation = false;
+        state.userInformation = null;
     }
   },
   extraReducers(builder) {

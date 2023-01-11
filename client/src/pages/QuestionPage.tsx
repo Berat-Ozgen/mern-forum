@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { Params, useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import {
@@ -8,21 +8,20 @@ import {
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
-import AuthContext from "../context/authContext";
 import { ISinglePost } from "../models/QuestionPage.models";
+import { useAppSelector, useAppDispatch } from "../reduxHooks/storeHook";
 
 const QuestionPage: React.FC = (): JSX.Element => {
-  const { user } = useContext(AuthContext);
   const paramas = useParams();
+  const { userInformation } = useAppSelector((state) => state.usersData);
+  const dispatch = useAppDispatch();
 
   const [singleQuestionState, setSingleQuestionState] = useState<ISinglePost>();
-
-  // const [questionAnswersState, setQuestionAnswersState] = useState([]);
 
   const deletePost: {
     userId: string;
   } = {
-    userId: user._id,
+    userId: userInformation?._id as string,
   };
 
   const questionPageHandleDeleted = (id: string): void => {

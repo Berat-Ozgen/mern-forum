@@ -1,17 +1,17 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import QuestionsCont from "../components/question";
-import AuthContext from "../context/authContext";
 import AskQuestion from "../components/askquestion/AskQuestion";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { IRecord } from "../models/Questions.models";
 import {
   allQuestionsFecthData,
   handleDeleteFecthData,
 } from "../apiFetch/questionsFetch";
+import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
 
 const Questions: React.FC = (): JSX.Element => {
-  const { user } = useContext(AuthContext);
+  const { userInformation } = useAppSelector((state) => state.usersData);
+  const dispatch = useAppDispatch();
   const [modal, setModal] = useState<boolean>(false);
   const [questions, setQuestions] = useState<IRecord[]>([]);
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ const Questions: React.FC = (): JSX.Element => {
   const deletePost: {
     userId: string;
   } = {
-    userId: user._id,
+    userId: userInformation?._id as string,
   };
 
   const handleDelete = async (id: string) => {

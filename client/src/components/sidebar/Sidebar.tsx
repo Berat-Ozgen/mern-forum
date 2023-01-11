@@ -1,12 +1,12 @@
-import { useContext } from "react";
 import { SlHome, SlLike, SlPeople } from "react-icons/sl";
 import { MdTrendingUp } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
-import AuthContext from "../../context/authContext";
+import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
 
 const Sidebar: React.FC = (): JSX.Element => {
-  const { user } = useContext(AuthContext);
+  const { userInformation } = useAppSelector((state) => state.usersData);
+  const dispatch = useAppDispatch();
   return (
     <aside className="w-64 h-full">
       <div className="overflow-y-auto h-screen py-4 px-3 bg-gray-50  dark:bg-gray-800">
@@ -52,7 +52,7 @@ const Sidebar: React.FC = (): JSX.Element => {
               <span className="flex-1 ml-3 whitespace-nowrap">Trendler</span>
             </div>
           </li>
-          {user && (
+          {userInformation && (
             <li>
               <Link
                 to={"/profile"}

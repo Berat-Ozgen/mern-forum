@@ -1,28 +1,27 @@
-import axios from "axios";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   apiDeleteAPost,
   apiGetAUsers,
   apiGetAUsersPosts,
 } from "../apiFetch/profilePagesFetch";
 import QuestionsCont from "../components/question";
-import AuthContext from "../context/authContext";
 import { IUsersPost, User } from "../models/ProfilePages.models";
+import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
 
 const ProfilePages: React.FC = (): JSX.Element => {
+  const { userInformation } = useAppSelector((state) => state.usersData);
+  const dispatch = useAppDispatch();
   const [aUsers, setAUsers] = useState<User>();
   const [usersPosts, setUsersPosts] = useState<IUsersPost[]>([]);
 
-  const { user } = useContext(AuthContext);
-
   const getAUsers = async (): Promise<void> => {
-    apiGetAUsers(user.username).then((res) => {
+    apiGetAUsers(userInformation?.username as string).then((res) => {
       setAUsers(res.data);
     });
   };
 
   const getAUsersPosts = async (): Promise<void> => {
-    apiGetAUsersPosts(user.username).then((res) => {
+    apiGetAUsersPosts(userInformation?.username as string).then((res) => {
       setUsersPosts(res.data);
     });
   };
@@ -30,7 +29,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
   const deletePost: {
     userId: string;
   } = {
-    userId: user._id,
+    userId: userInformation?._id as string,
   };
 
   const handleDelete = async (id: string) => {

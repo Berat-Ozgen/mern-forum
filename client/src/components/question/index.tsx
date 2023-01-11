@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import AuthContext from "../../context/authContext";
 import { IQuestionProps } from "../../models/Question";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
 
 const QuestionsCont: React.FC<IQuestionProps> = ({
   name,
@@ -14,7 +13,8 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
   handleDelete,
   handlePagePost,
 }): JSX.Element => {
-  const { user } = useContext(AuthContext);
+  const { userInformation } = useAppSelector((state) => state.usersData);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   return (
@@ -27,7 +27,7 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
       className="relative flex items-center m-6 outline-hidden border border-cyan-700 w-full  md:w-4/5 lg:w-4/4 xl:w-3/3 h-32"
     >
       <div className="absolute left-[96%] top-1">
-        {user._id === userId && (
+        {userInformation?._id === userId && (
           <BsThreeDots
             onClick={() => handleDelete(id)}
             size={30}

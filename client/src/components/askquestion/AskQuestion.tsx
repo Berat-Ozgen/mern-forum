@@ -1,18 +1,18 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Axios from "axios";
-import AuthContext from "../../context/authContext";
 import {
   AskQuestionProps,
   QuestionsPost,
 } from "../../models/AskQuestion.models";
+import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
 
 const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
+  const { userInformation } = useAppSelector((state) => state.usersData);
   const [des, setDes] = useState("" as string);
-  const { user } = useContext(AuthContext);
 
   const quesPost: QuestionsPost = {
-    userId: user._id,
-    username: user.username,
+    userId: userInformation?._id as string,
+    username: userInformation?.username as string,
     des: des,
   };
 
