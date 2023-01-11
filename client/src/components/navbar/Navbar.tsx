@@ -17,7 +17,7 @@ const Navbar: React.FC = () => {
   const navigate = useNavigate();
 
   const handleOut = () => {
-    localStorage.removeItem("users");
+    localStorage.removeItem("user");
     navigate("/login");
   };
 
