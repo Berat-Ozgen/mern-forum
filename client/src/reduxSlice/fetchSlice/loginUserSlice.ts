@@ -1,10 +1,10 @@
 import {  createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { createAxios } from "../../apiFetch/createAxios";
+import { loginPost } from "../../apiFetch/loginFetch";
 
 
 
 export const loginUserPost = createAsyncThunk('postData', async (a:any) => {
-  const response = await createAxios().post("/api/auth/login", a.loginData).then(res => {
+  const response = await loginPost(a.loginData).then(res => {
       if(res.status === 200) {
         a.navigate("/")
         return res
@@ -31,10 +31,10 @@ interface IState {
 
 
 const userData = localStorage.getItem("user");
-
+   
 const initialState: IState = {
   userInformation: userData ? JSON.parse(userData) : null,
-};
+}; 
 
  
     

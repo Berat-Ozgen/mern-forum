@@ -1,12 +1,15 @@
 import {configureStore} from '@reduxjs/toolkit'
 import themeSlice from './reduxSlice/themeSlice'
 import usersDataSlice from './reduxSlice/fetchSlice/loginUserSlice'
+import registerDataSlice from './reduxSlice/fetchSlice/registerUserPost'
+
 
 
 export const store = configureStore({
    reducer:{
     darkModeSlice: themeSlice,
-    usersData: usersDataSlice
+    usersData: usersDataSlice,
+    registerData: registerDataSlice,
    }
 })
 

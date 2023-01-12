@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerFechtPost } from "../apiFetch/registerFetch";
 import { IRegisterPost } from "../models/Register.models";
+import { registerUser } from "../reduxSlice/fetchSlice/registerUserPost";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState<IRegisterPost["username"]>("");
@@ -15,15 +16,9 @@ const Register: React.FC = () => {
     password: password,
   };
 
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>
-  ): Promise<void> => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await registerFechtPost(registerPost).then((res) => {
-      if (res.status === 200) {
-        navigate("/login");
-      }
-    });
+    registerUser({ registerPost, navigate });
   };
 
   return (
