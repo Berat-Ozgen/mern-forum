@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { LoginData } from "../models/Login.models";
 import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
@@ -16,14 +16,16 @@ const Login: React.FC = (): JSX.Element => {
     password: password,
   };
 
+  useEffect(() => {
+    userInformation && navigate("/");
+  }, []);
+
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
     dispatch(loginUserPost({ loginData, navigate }));
   };
-
-  console.log(userInformation);
 
   return (
     <section className="w-full bg-gray-900">

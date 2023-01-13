@@ -1,11 +1,18 @@
-import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
-import { registerFechtPost } from "../../apiFetch/registerFetch";
 
-export const registerUser = createAsyncThunk("registerUser", async (a:any) => {
+import { createSlice,createAsyncThunk } from "@reduxjs/toolkit";
+import { NavigateFunction } from "react-router-dom";
+import { registerFechtPost } from "../../apiFetch/registerFetch";
+import { IRegisterPost } from "../../models/Register.models";
+
+interface IA {
+  registerPost: IRegisterPost
+  navigate: NavigateFunction;
+  }
+
+export const registerUserPost = createAsyncThunk("registerUser", async (a:IA) => {
   const response = await registerFechtPost(a.registerPost).then((res) => {
     if(res.status === 200) {
         a.navigate("/login");
-        console.log("asddsa")
         return res
     } else {
         console.log("hata oluştu",res.status);
@@ -32,11 +39,10 @@ export const loginUsers = createSlice({
      
     },
     extraReducers(builder) {
-        builder.addCase(registerUser.fulfilled, (state,action) => {
-          state.postUsersGetData = action.payload
+        builder.addCase(registerUserPost.fulfilled, (state,action) => {
+          // state.postUsersGetData = action.payload
         })
     },
   });
   
-  export const {} = loginUsers.actions
   export default loginUsers.reducer

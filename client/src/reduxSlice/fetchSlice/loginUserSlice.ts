@@ -3,6 +3,7 @@ import { loginPost } from "../../apiFetch/loginFetch";
 
 
 
+
 export const loginUserPost = createAsyncThunk('postData', async (a:any) => {
   const response = await loginPost(a.loginData).then(res => {
       if(res.status === 200) {

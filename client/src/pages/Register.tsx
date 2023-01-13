@@ -2,13 +2,16 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerFechtPost } from "../apiFetch/registerFetch";
 import { IRegisterPost } from "../models/Register.models";
-import { registerUser } from "../reduxSlice/fetchSlice/registerUserPost";
+import { useAppDispatch } from "../reduxHooks/storeHook";
+import { registerUserPost } from "../reduxSlice/fetchSlice/registerUserPost";
 
-const Register: React.FC = () => {
+const Register: React.FC = (): JSX.Element => {
   const [username, setUsername] = useState<IRegisterPost["username"]>("");
   const [email, setEmail] = useState<IRegisterPost["email"]>("");
   const [password, setPassword] = useState<IRegisterPost["password"]>("");
+
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const registerPost: IRegisterPost = {
     username: username,
@@ -18,7 +21,8 @@ const Register: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    registerUser({ registerPost, navigate });
+    dispatch(registerUserPost({ registerPost, navigate }));
+    console.log(e);
   };
 
   return (
@@ -32,6 +36,7 @@ const Register: React.FC = () => {
           />
           BrtForum
         </div>
+
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
