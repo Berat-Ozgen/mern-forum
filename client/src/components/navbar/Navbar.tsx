@@ -14,8 +14,6 @@ const Navbar: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  console.log(userInformation);
-
   const navigate = useNavigate();
 
   const handleOut = () => {

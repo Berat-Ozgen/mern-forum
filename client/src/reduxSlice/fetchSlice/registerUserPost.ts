@@ -22,11 +22,7 @@ export const registerUserPost = createAsyncThunk("registerUser", async (a:IA) =>
  return response?.data;
 });
 
-// await registerFechtPost(registerPost).then((res) => {
-//     if (res.status === 200) {
-//       navigate("/login");
-//     }
-//   });
+
 
 const initialState = {
     postUsersGetData: []
@@ -40,7 +36,7 @@ export const loginUsers = createSlice({
     },
     extraReducers(builder) {
         builder.addCase(registerUserPost.fulfilled, (state,action) => {
-          // state.postUsersGetData = action.payload
+          state.postUsersGetData = action.payload
         })
     },
   });

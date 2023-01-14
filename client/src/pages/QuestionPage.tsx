@@ -1,22 +1,21 @@
-import { useEffect, useState } from "react";
-import { Params, useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import {
-  questionPageHandleDeletedFetchApi,
-  singleQuestionFetchApi,
-} from "../apiFetch/questionPageFetch";
+import { questionPageHandleDeletedFetchApi } from "../apiFetch/questionPageFetch";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
-import { ISinglePost } from "../models/QuestionPage.models";
 import { useAppSelector, useAppDispatch } from "../reduxHooks/storeHook";
+import { singleQuestion } from "../reduxSlice/fetchSlice/QuestionPageSlice";
 
 const QuestionPage: React.FC = (): JSX.Element => {
   const paramas = useParams();
   const { userInformation } = useAppSelector((state) => state.usersData);
-  const dispatch = useAppDispatch();
+  const { singleQuestionData } = useAppSelector(
+    (state) => state.QuestionPageSlice
+  );
 
-  const [singleQuestionState, setSingleQuestionState] = useState<ISinglePost>();
+  const dispatch = useAppDispatch();
 
   const deletePost: {
     userId: string;
@@ -30,15 +29,11 @@ const QuestionPage: React.FC = (): JSX.Element => {
     });
   };
 
-  const singleQuestion = async (paramas: Params): Promise<void> => {
-    await singleQuestionFetchApi(paramas).then((res) => {
-      setSingleQuestionState(res.data);
-    });
-  };
-
   useEffect(() => {
-    singleQuestion(paramas.id as any);
+    dispatch(singleQuestion(paramas.id as any));
   }, []);
+
+  console.log(singleQuestionData);
 
   return (
     <div className="bg-gray-900 flex flex-col items-center justify-evenly  w-full text-gray-400">
@@ -48,12 +43,12 @@ const QuestionPage: React.FC = (): JSX.Element => {
         </div>
         <div className="w-full flex items-center justify-center text-4xl">
           <QuestionsCont
-            userId={singleQuestionState?.userId as string}
+            userId={singleQuestionData?.userId as string}
             handleDelete={questionPageHandleDeleted}
-            id={singleQuestionState?._id as string}
+            id={singleQuestionData?._id as string}
             img={"https://picsum.photos/200/305"}
-            name={singleQuestionState?.username as string}
-            question={singleQuestionState?.des as string}
+            name={singleQuestionData?.username as string}
+            question={singleQuestionData?.des as string}
           />
         </div>
       </div>
