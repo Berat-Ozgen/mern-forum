@@ -11,14 +11,7 @@ import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
 const ProfilePages: React.FC = (): JSX.Element => {
   const { userInformation } = useAppSelector((state) => state.usersData);
   const dispatch = useAppDispatch();
-  const [aUsers, setAUsers] = useState<User>();
   const [usersPosts, setUsersPosts] = useState<IUsersPost[]>([]);
-
-  const getAUsers = async (): Promise<void> => {
-    apiGetAUsers(userInformation?.username as string).then((res) => {
-      setAUsers(res.data);
-    });
-  };
 
   const getAUsersPosts = async (): Promise<void> => {
     apiGetAUsersPosts(userInformation?.username as string).then((res) => {
@@ -39,7 +32,6 @@ const ProfilePages: React.FC = (): JSX.Element => {
   };
 
   useEffect(() => {
-    getAUsers();
     getAUsersPosts();
   }, []);
 
@@ -47,8 +39,16 @@ const ProfilePages: React.FC = (): JSX.Element => {
     console.log("deneme");
   };
 
+  if (!userInformation) {
+    return (
+      <div className="w-full text-7xl flex items-center justify-center bg-gray-900">
+        Lütfen Giriş yapınız
+      </div>
+    );
+  }
+
   return (
-    <div className="w-full flex flex-col bg-gray-50 dark:bg-gray-900">
+    <div className="w-full flex flex-col bg-gray-900">
       <div className="flex flex-1 flex-col justify-evenly items-center">
         <div>
           <img
@@ -58,7 +58,7 @@ const ProfilePages: React.FC = (): JSX.Element => {
           />
         </div>
         <div className="text-green-200 text-rubik-bubbles text-4xl">
-          {aUsers?.username.toUpperCase()}
+          {userInformation?.username.toUpperCase()}
         </div>
         <div className="text-green-200 text-lg">
           Türkiyede yaşıyorum javascirpt react typescript ile ugraşıyorum

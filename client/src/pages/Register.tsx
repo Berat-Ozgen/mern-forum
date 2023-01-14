@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerFechtPost } from "../apiFetch/registerFetch";
 import { IRegisterPost } from "../models/Register.models";
 import { useAppDispatch } from "../reduxHooks/storeHook";
 import { registerUserPost } from "../reduxSlice/fetchSlice/registerUserPost";
@@ -42,11 +41,7 @@ const Register: React.FC = (): JSX.Element => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Yeni Hesap Oluştur
             </h1>
-            <form
-              onSubmit={handleSubmit}
-              className="space-y-4 md:space-y-6"
-              action="#"
-            >
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
               <div>
                 <label
                   form="confirm-password"
@@ -75,8 +70,6 @@ const Register: React.FC = (): JSX.Element => {
                     setEmail(e.target.value as string)
                   }
                   type="email"
-                  name="email"
-                  id="email"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                 />
@@ -101,7 +94,6 @@ const Register: React.FC = (): JSX.Element => {
               <div className="flex items-start">
                 <div className="flex items-center h-5">
                   <input
-                    id="terms"
                     aria-describedby="terms"
                     type="checkbox"
                     className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
