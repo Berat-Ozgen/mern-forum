@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { questionPageHandleDeletedFetchApi } from "../apiFetch/questionPageFetch";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
 import { useAppSelector, useAppDispatch } from "../reduxHooks/storeHook";
+import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
 import { singleQuestion } from "../reduxSlice/fetchSlice/QuestionPageSlice";
 
 const QuestionPage: React.FC = (): JSX.Element => {
@@ -17,23 +17,17 @@ const QuestionPage: React.FC = (): JSX.Element => {
 
   const dispatch = useAppDispatch();
 
-  const deletePost: {
-    userId: string;
-  } = {
+  const deletePost = {
     userId: userInformation?._id as string,
   };
 
-  const questionPageHandleDeleted = (id: string): void => {
-    questionPageHandleDeletedFetchApi(id, deletePost).then((res) => {
-      if (res.status === 200) alert("silme işlemi başarılı !");
-    });
+  const questionPageDeleted = (id: string) => {
+    dispatch(handleDeletedPost({ id, deletePost }));
   };
 
   useEffect(() => {
     dispatch(singleQuestion(paramas.id as any));
   }, []);
-
-  console.log(singleQuestionData);
 
   return (
     <div className="bg-gray-900 flex flex-col items-center justify-evenly  w-full text-gray-400">
@@ -44,7 +38,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
         <div className="w-full flex items-center justify-center text-4xl">
           <QuestionsCont
             userId={singleQuestionData?.userId as string}
-            handleDelete={questionPageHandleDeleted}
+            handleDelete={questionPageDeleted}
             id={singleQuestionData?._id as string}
             img={"https://picsum.photos/200/305"}
             name={singleQuestionData?.username as string}
