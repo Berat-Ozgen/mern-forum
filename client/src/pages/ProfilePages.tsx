@@ -1,12 +1,9 @@
 import { useEffect, useState } from "react";
-import {
-  apiDeleteAPost,
-  apiGetAUsers,
-  apiGetAUsersPosts,
-} from "../apiFetch/profilePagesFetch";
+import { apiGetAUsersPosts } from "../apiFetch/profilePagesFetch";
 import QuestionsCont from "../components/question";
-import { IUsersPost, User } from "../models/ProfilePages.models";
+import { IUsersPost } from "../models/ProfilePages.models";
 import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
+import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
 
 const ProfilePages: React.FC = (): JSX.Element => {
   const { userInformation } = useAppSelector((state) => state.usersData);
@@ -19,16 +16,15 @@ const ProfilePages: React.FC = (): JSX.Element => {
     });
   };
 
-  const deletePost: {
-    userId: string;
-  } = {
+  const deletePost = {
     userId: userInformation?._id as string,
   };
 
   const handleDelete = async (id: string) => {
-    apiDeleteAPost(deletePost, id).then((res) => {
-      res.status === 200 ? window.location.reload() : alert("başarısız oldu");
-    });
+    dispatch(handleDeletedPost({ id, deletePost }));
+    // apiDeleteAPost(deletePost, id).then((res) => {
+    //   res.status === 200 ? window.location.reload() : alert("başarısız oldu");
+    // });
   };
 
   useEffect(() => {
