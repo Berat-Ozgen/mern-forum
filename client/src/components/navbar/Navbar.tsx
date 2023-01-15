@@ -61,7 +61,7 @@ const Navbar: React.FC = () => {
         <div>
           {userInformation && (
             <img
-              onClick={() => navigate("/profile")}
+              onClick={() => navigate(`/profile/${userInformation.username}`)}
               className="w-10 h-10 rounded-full"
               src="https://picsum.photos/200/300"
               alt="Rounded avatar"

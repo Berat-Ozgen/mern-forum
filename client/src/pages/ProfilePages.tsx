@@ -1,38 +1,40 @@
-import { useEffect, useState } from "react";
-import { apiGetAUsersPosts } from "../apiFetch/profilePagesFetch";
+import { useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { createAxios } from "../apiFetch/createAxios";
 import QuestionsCont from "../components/question";
-import { IUsersPost } from "../models/ProfilePages.models";
 import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
+import { getAUsersPage } from "../reduxSlice/fetchSlice/getAUsers";
+import { getSelfUsersPost } from "../reduxSlice/fetchSlice/getSelfUsersPosts";
 import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
 
 const ProfilePages: React.FC = (): JSX.Element => {
+  const navigate = useNavigate();
   const { userInformation } = useAppSelector((state) => state.usersData);
-  const dispatch = useAppDispatch();
-  const [usersPosts, setUsersPosts] = useState<IUsersPost[]>([]);
+  const { getSelfPostData } = useAppSelector(
+    (state) => state.getSelfUsersPostsSlice
+  );
+  const { getAUsersPageData } = useAppSelector((state) => state.getAUsersSlice);
 
-  const getAUsersPosts = async (): Promise<void> => {
-    apiGetAUsersPosts(userInformation?.username as string).then((res) => {
-      setUsersPosts(res.data);
-    });
-  };
+  const { username } = useParams();
+
+  const dispatch = useAppDispatch();
 
   const deletePost = {
     userId: userInformation?._id as string,
   };
-
   const handleDelete = async (id: string) => {
     dispatch(handleDeletedPost({ id, deletePost }));
-    // apiDeleteAPost(deletePost, id).then((res) => {
-    //   res.status === 200 ? window.location.reload() : alert("başarısız oldu");
-    // });
   };
 
   useEffect(() => {
-    getAUsersPosts();
-  }, []);
+    dispatch(getAUsersPage(username as string));
+    dispatch(getSelfUsersPost(username as string));
+  }, [username]);
 
-  const handlePagePost = () => {
-    console.log("deneme");
+  console.log(getAUsersPageData);
+
+  const handlePagePost = (id: string) => {
+    navigate(`/questionpage/${id}`);
   };
 
   if (!userInformation) {
@@ -54,16 +56,17 @@ const ProfilePages: React.FC = (): JSX.Element => {
           />
         </div>
         <div className="text-green-200 text-rubik-bubbles text-4xl">
-          {userInformation?.username.toUpperCase()}
+          {getAUsersPageData?.username?.toUpperCase()}
         </div>
         <div className="text-green-200 text-lg">
           Türkiyede yaşıyorum javascirpt react typescript ile ugraşıyorum
         </div>
       </div>
       <div className="flex flex-1 flex-col  items-center  justify-evenly">
-        {usersPosts?.length > 0 ? (
-          usersPosts?.map((item) => (
+        {getSelfPostData?.length > 0 ? (
+          getSelfPostData?.map((item: any) => (
             <QuestionsCont
+              key={item._id}
               handlePagePost={handlePagePost}
               name={item.username}
               img={item.img || "https://picsum.photos/id/237/200/300"}

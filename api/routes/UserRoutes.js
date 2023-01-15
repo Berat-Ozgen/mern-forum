@@ -10,7 +10,11 @@ router.get("/get-user", async (req, res) => {
     const user = userId
       ? await User.findById(userId)
       : await User.findOne({ username: username });
-    res.status(200).json(user);
+    if (user) {
+      res.status(200).json(user);
+    } else {
+      res.status(200).json({ message: "oyle bir kullanı bulunamadı" });
+    }
   } catch (error) {
     res.status(500).json(error);
   }

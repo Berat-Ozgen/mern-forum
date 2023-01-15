@@ -10,13 +10,12 @@ export interface User {
 }
 
 export interface IUsersPost {
-    createdAt: string;
-    des: string;
-    updatedAt: string;
-    img:string
+    _id: string;
     userId: string;
     username: string;
+    des: string;
+    createdAt: string;
+    updatedAt: string;
     __v: number;
-    _id: string;
   }
   

@@ -4,6 +4,12 @@ import usersDataSlice from './reduxSlice/fetchSlice/loginUserSlice'
 import registerDataSlice from './reduxSlice/fetchSlice/registerUserPost'
 import QuestionPageSlice from './reduxSlice/fetchSlice/QuestionPageSlice'
 import PostDeletedSlice from './reduxSlice/fetchSlice/postDeletedSlice'
+import getSelfUsersPostsSlice from './reduxSlice/fetchSlice/getSelfUsersPosts'
+import allQuestionsSlice from './reduxSlice/fetchSlice/allQuestions'
+import getAUsersSlice from './reduxSlice/fetchSlice/getAUsers'
+
+
+
 
 
 
@@ -15,7 +21,10 @@ export const store = configureStore({
     usersData: usersDataSlice,
     registerData: registerDataSlice,
     QuestionPageSlice: QuestionPageSlice,
-    PostDeletedSlice:PostDeletedSlice
+    PostDeletedSlice:PostDeletedSlice,
+    getSelfUsersPostsSlice:getSelfUsersPostsSlice,
+    allQuestionsSlice:allQuestionsSlice,
+    getAUsersSlice:getAUsersSlice,
    }
 })
 

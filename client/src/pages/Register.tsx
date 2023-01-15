@@ -21,7 +21,6 @@ const Register: React.FC = (): JSX.Element => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(registerUserPost({ registerPost, navigate }));
-    console.log(e);
   };
 
   return (

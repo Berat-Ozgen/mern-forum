@@ -9,7 +9,7 @@ export const apiGetAUsers = async (username:string):Promise<any> => {
 }
 
 // kullanıcın postlarını getirir
-export const apiGetAUsersPosts = async (username:string):Promise<any> => {
+export const apiGetSelfUsersPosts = async (username:string):Promise<any> => {
    return await createAxios()
     .get(
         `/api/questions/get-usersposts?username=${username}`

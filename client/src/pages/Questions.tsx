@@ -2,43 +2,33 @@ import { useEffect, useState } from "react";
 import QuestionsCont from "../components/question";
 import AskQuestion from "../components/askquestion/AskQuestion";
 import { useNavigate } from "react-router-dom";
-import { IRecord } from "../models/Questions.models";
-import {
-  allQuestionsFecthData,
-  handleDeleteFecthData,
-} from "../apiFetch/questionsFetch";
 import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
+import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
+import { getAllQuestionsPost } from "../reduxSlice/fetchSlice/allQuestions";
 
 const Questions: React.FC = (): JSX.Element => {
   const { userInformation } = useAppSelector((state) => state.usersData);
+  const { allQuestions } = useAppSelector((state) => state.allQuestionsSlice);
+
   const dispatch = useAppDispatch();
   const [modal, setModal] = useState<boolean>(false);
-  const [questions, setQuestions] = useState<IRecord[]>([]);
   const navigate = useNavigate();
 
-  const allQuestions = async (): Promise<void> => {
-    await allQuestionsFecthData().then((res) => setQuestions(res.data));
-  };
-
-  useEffect(() => {
-    allQuestions();
-  }, []);
-
-  const deletePost: {
-    userId: string;
-  } = {
+  const deletePost = {
     userId: userInformation?._id as string,
   };
 
   const handleDelete = async (id: string) => {
-    await handleDeleteFecthData(id, deletePost).then((res) => {
-      res.status === 200 && window.location.reload();
-    });
+    dispatch(handleDeletedPost({ id, deletePost }));
   };
 
   const handlePagePost = (id: string) => {
     navigate(`questionpage/${id}`);
   };
+
+  useEffect(() => {
+    dispatch(getAllQuestionsPost());
+  }, []);
 
   return (
     <div className="p-6   w-full h-screen flex flex-col flex-nowrap items-center overflow-auto bg-gray-900">
@@ -54,7 +44,7 @@ const Questions: React.FC = (): JSX.Element => {
         {modal && <AskQuestion setModal={setModal} />}
       </div>
       <div className="w-full h-full outline-hidden">
-        {questions?.map((item) => (
+        {allQuestions?.map((item) => (
           <QuestionsCont
             handlePagePost={handlePagePost}
             handleDelete={handleDelete}

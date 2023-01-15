@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
@@ -10,6 +10,7 @@ import { singleQuestion } from "../reduxSlice/fetchSlice/QuestionPageSlice";
 
 const QuestionPage: React.FC = (): JSX.Element => {
   const paramas = useParams();
+  const navigate = useNavigate();
   const { userInformation } = useAppSelector((state) => state.usersData);
   const { singleQuestionData } = useAppSelector(
     (state) => state.QuestionPageSlice
@@ -25,6 +26,10 @@ const QuestionPage: React.FC = (): JSX.Element => {
     dispatch(handleDeletedPost({ id, deletePost }));
   };
 
+  const handleOrientationUsers = (username: string) => {
+    navigate(`/profile/${username}`);
+  };
+
   useEffect(() => {
     dispatch(singleQuestion(paramas.id as any));
   }, []);
@@ -38,6 +43,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
         <div className="w-full flex items-center justify-center text-4xl">
           <QuestionsCont
             userId={singleQuestionData?.userId as string}
+            handleOrientationUsers={handleOrientationUsers}
             handleDelete={questionPageDeleted}
             id={singleQuestionData?._id as string}
             img={"https://picsum.photos/200/305"}

@@ -12,6 +12,7 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
   id,
   handleDelete,
   handlePagePost,
+  handleOrientationUsers,
 }): JSX.Element => {
   const { userInformation } = useAppSelector((state) => state.usersData);
   const dispatch = useAppDispatch();
@@ -41,6 +42,11 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
             className="w-10 h-10 rounded-full"
             src={img}
             alt="profileImage"
+            onClick={() => {
+              if (handleOrientationUsers) {
+                handleOrientationUsers(name!);
+              }
+            }}
           />
         </div>
         <div className="text-green-300">{name}</div>
