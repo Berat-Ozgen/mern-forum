@@ -1,10 +1,23 @@
-import React from "react";
+import { FC, useState } from "react";
 
-const AskQuestionInput: React.FC = (): JSX.Element => {
+interface IProps {
+  createQuestionAnswers: () => void;
+}
+
+const AskQuestionInput: FC<IProps> = ({
+  createQuestionAnswers,
+}): JSX.Element => {
+  const [commentInputValue, setCommentInputValue] = useState("" as string);
+
   return (
     <div className="flex flex-row justify-evenly  items-center  w-full h-full p-3">
       <div className="w-11/12">
-        <input className="w-full h-full px-3 py-3  text-slate-200 relative bg-gray-800 rounded text-sm border border-slate-600 outline-none " />
+        <input
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setCommentInputValue(e.target.value);
+          }}
+          className="w-full h-full px-3 py-3  text-slate-200  bg-gray-800 rounded text-sm border border-slate-600 outline-none "
+        />
       </div>
       <div className="mt-1">
         <button

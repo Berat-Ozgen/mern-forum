@@ -1,13 +1,12 @@
-import { useEffect } from "react";
+import { useEffect, FC } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { createAxios } from "../apiFetch/createAxios";
 import QuestionsCont from "../components/question";
 import { useAppDispatch, useAppSelector } from "../reduxHooks/storeHook";
 import { getAUsersPage } from "../reduxSlice/fetchSlice/getAUsers";
 import { getSelfUsersPost } from "../reduxSlice/fetchSlice/getSelfUsersPosts";
 import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
 
-const ProfilePages: React.FC = (): JSX.Element => {
+const ProfilePages: FC = (): JSX.Element => {
   const navigate = useNavigate();
   const { userInformation } = useAppSelector((state) => state.usersData);
   const { getSelfPostData } = useAppSelector(

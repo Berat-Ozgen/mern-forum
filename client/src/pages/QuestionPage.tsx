@@ -11,12 +11,12 @@ import { singleQuestion } from "../reduxSlice/fetchSlice/QuestionPageSlice";
 const QuestionPage: React.FC = (): JSX.Element => {
   const paramas = useParams();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+
   const { userInformation } = useAppSelector((state) => state.usersData);
   const { singleQuestionData } = useAppSelector(
     (state) => state.QuestionPageSlice
   );
-
-  const dispatch = useAppDispatch();
 
   const deletePost = {
     userId: userInformation?._id as string,
@@ -29,6 +29,8 @@ const QuestionPage: React.FC = (): JSX.Element => {
   const handleOrientationUsers = (username: string) => {
     navigate(`/profile/${username}`);
   };
+
+  const createQuestionAnswers = () => {};
 
   useEffect(() => {
     dispatch(singleQuestion(paramas.id as any));
@@ -61,7 +63,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
             <QuestionComments />
           </div>
           <div className="flex flex-[1] w-full">
-            <AskQuestionInput />
+            <AskQuestionInput createQuestionAnswers={createQuestionAnswers} />
           </div>
         </div>
       </div>
