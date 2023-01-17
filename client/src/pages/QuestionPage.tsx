@@ -7,6 +7,7 @@ import QuestionComments from "../components/questionComments/QuestionComments";
 import { AnswersData } from "../models/anwersData.model";
 import { useAppSelector, useAppDispatch } from "../reduxHooks/storeHook";
 import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
+import { getPostAnswers } from "../reduxSlice/fetchSlice/postGetAnswers";
 import { createAnswersQues } from "../reduxSlice/fetchSlice/QuestionAnswersCreate";
 import { singleQuestion } from "../reduxSlice/fetchSlice/QuestionPageSlice";
 
@@ -22,8 +23,6 @@ const QuestionPage: React.FC = (): JSX.Element => {
   const { questionAnswersData } = useAppSelector(
     (state) => state.QuestionAnswersCreateSlice
   );
-
-  console.log(questionAnswersData);
 
   const deletePost = {
     userId: userInformation?._id as string,
@@ -45,6 +44,9 @@ const QuestionPage: React.FC = (): JSX.Element => {
     dispatch(singleQuestion(paramas.id as any));
   }, []);
 
+  useEffect(() => {
+    dispatch(getPostAnswers("63abaf47d3fba963081044cf"));
+  }, []);
   return (
     <div className="bg-gray-900 flex flex-col items-center justify-evenly  w-full text-gray-400">
       <div className="w-full flex flex-[1] flex-col items-center justify-center">
