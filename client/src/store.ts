@@ -7,6 +7,8 @@ import PostDeletedSlice from './reduxSlice/fetchSlice/postDeletedSlice'
 import getSelfUsersPostsSlice from './reduxSlice/fetchSlice/getSelfUsersPosts'
 import allQuestionsSlice from './reduxSlice/fetchSlice/allQuestions'
 import getAUsersSlice from './reduxSlice/fetchSlice/getAUsers'
+import QuestionAnswersCreateSlice from './reduxSlice/fetchSlice/QuestionAnswersCreate'
+
 
 
 
@@ -25,6 +27,7 @@ export const store = configureStore({
     getSelfUsersPostsSlice:getSelfUsersPostsSlice,
     allQuestionsSlice:allQuestionsSlice,
     getAUsersSlice:getAUsersSlice,
+    QuestionAnswersCreateSlice:QuestionAnswersCreateSlice,
    }
 })
 

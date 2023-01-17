@@ -4,8 +4,10 @@ import { toast, ToastContainer } from "react-toastify";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
+import { AnswersData } from "../models/anwersData.model";
 import { useAppSelector, useAppDispatch } from "../reduxHooks/storeHook";
 import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
+import { createAnswersQues } from "../reduxSlice/fetchSlice/QuestionAnswersCreate";
 import { singleQuestion } from "../reduxSlice/fetchSlice/QuestionPageSlice";
 
 const QuestionPage: React.FC = (): JSX.Element => {
@@ -17,6 +19,11 @@ const QuestionPage: React.FC = (): JSX.Element => {
   const { singleQuestionData } = useAppSelector(
     (state) => state.QuestionPageSlice
   );
+  const { questionAnswersData } = useAppSelector(
+    (state) => state.QuestionAnswersCreateSlice
+  );
+
+  console.log(questionAnswersData);
 
   const deletePost = {
     userId: userInformation?._id as string,
@@ -30,7 +37,9 @@ const QuestionPage: React.FC = (): JSX.Element => {
     navigate(`/profile/${username}`);
   };
 
-  const createQuestionAnswers = () => {};
+  const createQuestionAnswers = (anwersData: AnswersData) => {
+    dispatch(createAnswersQues(anwersData));
+  };
 
   useEffect(() => {
     dispatch(singleQuestion(paramas.id as any));
@@ -63,7 +72,10 @@ const QuestionPage: React.FC = (): JSX.Element => {
             <QuestionComments />
           </div>
           <div className="flex flex-[1] w-full">
-            <AskQuestionInput createQuestionAnswers={createQuestionAnswers} />
+            <AskQuestionInput
+              createQuestionAnswers={createQuestionAnswers}
+              postId={singleQuestionData._id}
+            />
           </div>
         </div>
       </div>

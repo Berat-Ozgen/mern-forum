@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import { createAnswes } from '../../apiFetch/createAnswes';
 
-export const createQuestionAnswers = createAsyncThunk("createQuestionAnswers", async (AnswesData) => {
+export const createAnswersQues = createAsyncThunk("createQuestionAnswers", async (AnswesData:any) => {
     const response = await createAnswes(AnswesData).then(res => {
         if (res.status === 200) {
             alert("Answes successfully");
@@ -13,9 +13,23 @@ export const createQuestionAnswers = createAsyncThunk("createQuestionAnswers", a
     return response?.data;
 })
 
-const initialState = {
-    questionAnswersData: []
+interface QuestionAnswerData {
+    createdAt: string;
+    des: string;
+    postId: string;
+    updatedAt: string;
+    username: string;
+    __v: number;
+    _id: string;
 }
+
+interface InitialState {
+    questionAnswersData: QuestionAnswerData;
+}
+
+const initialState: InitialState = {
+    questionAnswersData: {} as QuestionAnswerData
+};
 
 export const createAnswers = createSlice({
     name: "createAnswers",
@@ -24,8 +38,10 @@ export const createAnswers = createSlice({
 
     },
     extraReducers(builder) {
-        builder.addCase(createQuestionAnswers.fulfilled, (state,action) => {
+        builder.addCase(createAnswersQues.fulfilled, (state,action) => {
             state.questionAnswersData = action.payload;
         })
     },
 })
+
+export default createAnswers.reducer
