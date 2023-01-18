@@ -45,7 +45,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
   }, []);
 
   useEffect(() => {
-    dispatch(getPostAnswers("63abaf47d3fba963081044cf"));
+    dispatch(getPostAnswers(paramas.id as string));
   }, []);
   return (
     <div className="bg-gray-900 flex flex-col items-center justify-evenly  w-full text-gray-400">

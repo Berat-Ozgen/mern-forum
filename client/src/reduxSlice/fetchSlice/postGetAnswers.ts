@@ -9,7 +9,6 @@ import { getAnswersFetch } from "../../apiFetch/getPostAllAnswers";
     const response = await getAnswersFetch(postId).then(res => {
         if (res.status === 200) {
             alert("başarılı bir şekilde cevaplar geldi")
-            console.log("başarılı")
             return res
         } else {
             console.log("başarısız")

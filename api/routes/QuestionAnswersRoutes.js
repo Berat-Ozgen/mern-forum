@@ -13,12 +13,12 @@ router.post("/create-questionAnswers", async (req, res) => {
 });
 
 // bir postun yorumlarını getirme
-
 router.get("/post-anwers/:postId", async (req, res) => {
   try {
-    const questionAnswers = await QuestionAnswers.find(req.params.postId);
+    const questionAnswers = await QuestionAnswers.find({
+      _id: req.params.postId,
+    });
     res.status(200).json(questionAnswers);
-    res;
   } catch (error) {
     res.status(404).json("hata");
   }
