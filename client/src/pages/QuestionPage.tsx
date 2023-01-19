@@ -20,9 +20,11 @@ const QuestionPage: React.FC = (): JSX.Element => {
   const { singleQuestionData } = useAppSelector(
     (state) => state.QuestionPageSlice
   );
-  const { questionAnswersData } = useAppSelector(
-    (state) => state.QuestionAnswersCreateSlice
+  const { postAnswersData } = useAppSelector(
+    (state) => state.postGetAnswersSlice
   );
+
+  console.log(postAnswersData);
 
   const deletePost = {
     userId: userInformation?._id as string,
@@ -48,7 +50,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
     dispatch(getPostAnswers(paramas.id as string));
   }, []);
   return (
-    <div className="bg-gray-900 flex flex-col items-center justify-evenly  w-full text-gray-400">
+    <div className="bg-gray-900 flex flex-col items-center justify-evenly overflow-hidden  w-full text-gray-400">
       <div className="w-full flex flex-[1] flex-col items-center justify-center">
         <div className="w-full flex items-center justify-center text-4xl">
           Soru
@@ -70,8 +72,16 @@ const QuestionPage: React.FC = (): JSX.Element => {
           Yorumlar
         </div>
         <div className="w-full p-3 flex flex-col flex-[4]">
-          <div className="flex  flex-[9]">
-            <QuestionComments />
+          <div className="flex flex-col gap-8 flex-[9]">
+            {postAnswersData?.map((data) => (
+              <QuestionComments
+                key={data._id}
+                username={data.username}
+                des={data.des}
+                createdAt={data.createdAt}
+                updatedAt={data.updatedAt}
+              />
+            ))}
           </div>
           <div className="flex flex-[1] w-full">
             <AskQuestionInput

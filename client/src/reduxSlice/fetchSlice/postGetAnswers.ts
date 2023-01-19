@@ -8,7 +8,6 @@ import { getAnswersFetch } from "../../apiFetch/getPostAllAnswers";
   export const getPostAnswers = createAsyncThunk("getPostAnswers", async(postId: string) =>  {
     const response = await getAnswersFetch(postId).then(res => {
         if (res.status === 200) {
-            alert("başarılı bir şekilde cevaplar geldi")
             return res
         } else {
             console.log("başarısız")
@@ -19,10 +18,20 @@ import { getAnswersFetch } from "../../apiFetch/getPostAllAnswers";
   });
   
 
+  interface InitialState {
+    postAnswersData: {
+        _id: string;
+        postId: string;
+        username: string;
+        des: string;
+        createdAt: string;
+        updatedAt: string;
+        __v: number;
+    }[];
+}
 
-
-const initialState = {
-    postAnswersData: []
+const initialState:InitialState = {
+    postAnswersData: [],
 }
 
 export const getAnswers = createSlice({

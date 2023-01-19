@@ -16,7 +16,7 @@ router.post("/create-questionAnswers", async (req, res) => {
 router.get("/post-anwers/:postId", async (req, res) => {
   try {
     const questionAnswers = await QuestionAnswers.find({
-      _id: req.params.postId,
+      postId: req.params.postId,
     });
     res.status(200).json(questionAnswers);
   } catch (error) {
