@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
-import { deleteAnwersPost } from "../apiFetch/PostAnswersdelete";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
 import { AnswersData } from "../models/anwersData.model";
 import { useAppSelector, useAppDispatch } from "../reduxHooks/storeHook";
+import { postAnwersDeletedApi } from "../reduxSlice/fetchSlice/postAnwersDeleted";
 import { handleDeletedPost } from "../reduxSlice/fetchSlice/postDeletedSlice";
 import { getPostAnswers } from "../reduxSlice/fetchSlice/postGetAnswers";
 import { createAnswersQues } from "../reduxSlice/fetchSlice/QuestionAnswersCreate";
@@ -30,7 +30,6 @@ const QuestionPage: React.FC = (): JSX.Element => {
   const deletePost = {
     userId: userInformation?._id as string,
   };
-
   const questionPageDeleted = (id: string) => {
     dispatch(handleDeletedPost({ id, deletePost }));
   };
@@ -41,6 +40,13 @@ const QuestionPage: React.FC = (): JSX.Element => {
 
   const createQuestionAnswers = (anwersData: AnswersData) => {
     dispatch(createAnswersQues(anwersData));
+  };
+
+  const deleteAnwers = {
+    userId: userInformation?._id as string,
+  };
+  const deleteAnwersPost = (id: string) => {
+    dispatch(postAnwersDeletedApi({ id, deleteAnwers }));
   };
 
   useEffect(() => {
@@ -81,6 +87,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
                 des={data.des}
                 createdAt={data.createdAt}
                 updatedAt={data.updatedAt}
+                deleteAnwersPost={deleteAnwersPost}
               />
             ))}
           </div>

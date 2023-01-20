@@ -28,7 +28,7 @@ router.get("/post-anwers/:postId", async (req, res) => {
 router.delete("/post-anwers-delete/:id", async (req, res) => {
   try {
     const questionAnswers = await QuestionAnswers.findById(req.params.id);
-    if (questionAnswers.userId === req.body.deletePost.userId) {
+    if (questionAnswers.userId === req.body.deleteAnwers.userId) {
       await post.deleteOne();
       res.status(200).json("Başarılı bir şekilde silindi");
     } else {
