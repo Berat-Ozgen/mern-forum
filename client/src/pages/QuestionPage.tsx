@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import { deleteAnwersPost } from "../apiFetch/PostAnswersdelete";
 import AskQuestionInput from "../components/askquestioninput/AskQuestionInput";
 import QuestionsCont from "../components/question";
 import QuestionComments from "../components/questionComments/QuestionComments";
@@ -67,12 +68,12 @@ const QuestionPage: React.FC = (): JSX.Element => {
           />
         </div>
       </div>
-      <div className="w-full flex flex-col flex-[4] ">
+      <div className="w-full flex flex-col flex-[4] overflow-hidden">
         <div className="w-full text-5xl flex mt-3 flex-[1] justify-center ">
           Yorumlar
         </div>
-        <div className="w-full p-3 flex flex-col flex-[4]">
-          <div className="flex flex-col gap-8 flex-[9]">
+        <div className="w-full p-3 flex flex-col  flex-[4]">
+          <div className="flex flex-col  items-center gap-8 flex-[9]">
             {postAnswersData?.map((data) => (
               <QuestionComments
                 key={data._id}

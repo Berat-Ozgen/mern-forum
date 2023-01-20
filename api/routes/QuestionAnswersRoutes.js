@@ -24,4 +24,19 @@ router.get("/post-anwers/:postId", async (req, res) => {
   }
 });
 
+// bir postun yorumunu silmek
+router.delete("/post-anwers-delete/:id", async (req, res) => {
+  try {
+    const questionAnswers = await QuestionAnswers.findById(req.params.id);
+    if (questionAnswers.userId === req.body.deletePost.userId) {
+      await post.deleteOne();
+      res.status(200).json("Başarılı bir şekilde silindi");
+    } else {
+      res.status(403).json("Post Silinirken bir hata oluştu");
+    }
+  } catch (err) {
+    res.status(500).json("post catch");
+  }
+});
+
 module.exports = router;
