@@ -25,8 +25,6 @@ const QuestionPage: React.FC = (): JSX.Element => {
     (state) => state.postGetAnswersSlice
   );
 
-  console.log(postAnswersData);
-
   const deletePost = {
     userId: userInformation?._id as string,
   };

@@ -8,6 +8,8 @@ interface IPPostAnwersDeletedApi {
     }
 }
 
+
+
 export const postAnwersDeletedApi = createAsyncThunk("postAnwersDeletedApi", async({id, deleteAnwers}: IPPostAnwersDeletedApi) => {
    const response = await deleteAnwersPost(id,deleteAnwers).then((res) => {
         if (res.status === 200) {

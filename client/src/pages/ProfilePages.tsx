@@ -30,8 +30,6 @@ const ProfilePages: FC = (): JSX.Element => {
     dispatch(getSelfUsersPost(username as string));
   }, [username]);
 
-  console.log(getAUsersPageData);
-
   const handlePagePost = (id: string) => {
     navigate(`/questionpage/${id}`);
   };
