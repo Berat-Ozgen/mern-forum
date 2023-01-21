@@ -27,15 +27,17 @@ router.get("/post-anwers/:postId", async (req, res) => {
 // bir postun yorumunu silmek
 router.delete("/post-anwers-delete/:id", async (req, res) => {
   try {
-    const questionAnswers = await QuestionAnswers.findById(req.params.id);
-    if (questionAnswers.userId === req.body.deleteAnwers.userId) {
-      await post.deleteOne();
-      res.status(200).json("Başarılı bir şekilde silindi");
+    const questionAnswers = await QuestionAnswers.findOne({
+      _id: req.params.id,
+    });
+    if (questionAnswers) {
+      await questionAnswers.deleteOne();
+      res.status(200).json({ message: "Başarılı bir şekilde silindi" });
     } else {
-      res.status(403).json("Post Silinirken bir hata oluştu");
+      res.status(403).json({ message: "Post Silinirken bir hata oluştu" });
     }
   } catch (err) {
-    res.status(500).json("post catch");
+    res.status(500).json({ message: "post catch" });
   }
 });
 

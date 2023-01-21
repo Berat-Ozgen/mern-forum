@@ -3,7 +3,8 @@ import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
 import { useAppSelector } from "../../reduxHooks/storeHook";
 
 interface IProps {
-  key: string;
+  id: string;
+  key: number;
   username: string;
   des: string;
   createdAt: string;
@@ -12,11 +13,13 @@ interface IProps {
 }
 
 const QuestionComments: FC<IProps> = ({
+  key,
   username,
   createdAt,
   des,
   updatedAt,
   deleteAnwersPost,
+  id,
 }): JSX.Element => {
   const { userInformation } = useAppSelector((state) => state.usersData);
 
@@ -34,9 +37,7 @@ const QuestionComments: FC<IProps> = ({
           <div className="flex items-center justify-center w-full h-full">
             <AiOutlineDislike size={30 as number} color={"#d32f2f" as string} />
           </div>
-          <div onClick={() => deleteAnwersPost(userInformation?._id as string)}>
-            Sil
-          </div>
+          <div onClick={() => deleteAnwersPost(id as string)}>Sil</div>
         </div>
       </div>
     </div>

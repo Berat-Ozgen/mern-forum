@@ -78,13 +78,14 @@ const QuestionPage: React.FC = (): JSX.Element => {
         </div>
         <div className="w-full p-3 flex flex-col  flex-[4]">
           <div className="flex flex-col  items-center gap-8 flex-[9]">
-            {postAnswersData?.map((data) => (
+            {postAnswersData?.map((data, i) => (
               <QuestionComments
-                key={data._id}
-                username={data.username}
-                des={data.des}
-                createdAt={data.createdAt}
-                updatedAt={data.updatedAt}
+                id={data?._id}
+                key={i}
+                username={data?.username}
+                des={data?.des}
+                createdAt={data?.createdAt}
+                updatedAt={data?.updatedAt}
                 deleteAnwersPost={deleteAnwersPost}
               />
             ))}
