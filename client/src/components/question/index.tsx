@@ -1,8 +1,14 @@
-import { AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
-import { BsThreeDots } from "react-icons/bs";
+import { AiFillEdit, AiOutlineDislike, AiOutlineLike } from "react-icons/ai";
+import {
+  BsFillExclamationDiamondFill,
+  BsFillTrash2Fill,
+  BsThreeDots,
+} from "react-icons/bs";
 import { IQuestionProps } from "../../models/Question";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
+import { useState } from "react";
+import "animate.css";
 
 const QuestionsCont: React.FC<IQuestionProps> = ({
   name,
@@ -14,6 +20,7 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
   handlePagePost,
   handleOrientationUsers,
 }): JSX.Element => {
+  const [postFeatures, setPostFeatures] = useState<boolean>(false);
   const { userInformation } = useAppSelector((state) => state.usersData);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -28,12 +35,35 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
       className="relative flex items-center m-6 outline-hidden border border-cyan-700 w-full  md:w-4/5 lg:w-4/4 xl:w-3/3 h-32"
     >
       <div className="absolute left-[96%] top-1">
-        {userInformation?._id === userId && (
-          <BsThreeDots
-            onClick={() => handleDelete(id)}
-            size={30}
-            color={"silver"}
-          />
+        <BsThreeDots
+          size="30"
+          color="white"
+          onClick={() => setPostFeatures(!postFeatures)}
+        />
+        {postFeatures && (
+          <div className="absolute bg-neutral-600 flex flex-col justify-around  right-[-45px] w-32 h-28 border">
+            <div
+              onClick={() => handleDelete(id)}
+              className="text-base w-full hover:bg-slate-800 cursor-pointer  flex justify-evenly items-center"
+            >
+              <span>Postu Sil</span>
+              <span>
+                <BsFillTrash2Fill />
+              </span>
+            </div>
+            <div className="text-base w-full  flex hover:bg-slate-800 cursor-pointer justify-evenly items-center">
+              <span>Şikayet et</span>
+              <span>
+                <BsFillExclamationDiamondFill />
+              </span>
+            </div>
+            <div className="text-base w-full hover:bg-slate-800 cursor-pointer flex justify-evenly items-center">
+              <span>Düzenle</span>
+              <span>
+                <AiFillEdit />
+              </span>
+            </div>
+          </div>
         )}
       </div>
       <div className="flex h-full justify-center flex-col items-center md:flex-col  md:items-center flex-[1]">
@@ -67,3 +97,5 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
 };
 
 export default QuestionsCont;
+
+// userInformation?._id === userId
