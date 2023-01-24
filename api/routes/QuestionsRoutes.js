@@ -48,6 +48,7 @@ router.get("/get-singlepost/:id", async (req, res) => {
 router.delete("/delete-post/:id", async (req, res) => {
   try {
     const post = await Questions.findById(req.params.id);
+
     if (post.userId === req.body.deletePost.userId) {
       await post.deleteOne();
       res.status(200).json("Başarılı bir şekilde silindi");
