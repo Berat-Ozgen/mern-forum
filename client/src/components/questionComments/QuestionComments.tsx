@@ -39,7 +39,7 @@ const QuestionComments: FC<IProps> = ({
           </div>
           {userInformation?.username === username && (
             <div
-              className="flex items-center justify-center w-full h-full"
+              className="flex items-center justify-center cursor-pointer w-full h-full"
               onClick={() => deleteAnwersPost(id as string)}
             >
               <AiFillDelete size={28} />

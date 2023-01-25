@@ -71,25 +71,22 @@ const Navbar: React.FC = () => {
         </div>
         <div className="cursor-pointer">
           {userInformation ? (
-            <div className="flex items-center justify-center  w-full h-full">
+            <div className="flex items-center relative justify-center  w-full h-full">
               <MdOutlineNotifications
                 color="grey"
                 size={35}
                 onClick={() => setNotification(!notification)}
               />
               {notification && (
-                <div className="absolute bg-neutral-600 flex flex-col justify-around  right-[-45px] w-32 h-28 border">
+                <div className="absolute top-10 z-10 bg-neutral-600 flex flex-col justify-around   w-44 h-28 border">
                   <div className="text-base w-full hover:bg-slate-800 cursor-pointer  flex justify-evenly items-center">
-                    <span>başlık</span>
-                    <span>icon</span>
+                    <span>berat sizi takip etti</span>
                   </div>
                   <div className="text-base w-full  flex hover:bg-slate-800 cursor-pointer justify-evenly items-center">
-                    <span>başlık</span>
-                    <span>icon</span>
+                    <span>berat sizi takip etti</span>
                   </div>
                   <div className="text-base w-full hover:bg-slate-800 cursor-pointer flex justify-evenly items-center">
-                    <span>başlık</span>
-                    <span>icon</span>
+                    <span>berat sizi takip etti</span>
                   </div>
                 </div>
               )}
