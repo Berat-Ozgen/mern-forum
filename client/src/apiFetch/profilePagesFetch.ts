@@ -8,6 +8,8 @@ export const apiGetAUsers = async (username:string):Promise<any> => {
     .get(`/api/users/get-user?username=${username}`)
 }
 
+
+
 // kullanıcın postlarını getirir
 export const apiGetSelfUsersPosts = async (username:string):Promise<any> => {
    return await createAxios()

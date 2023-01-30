@@ -33,7 +33,7 @@ interface IState {
 
 const userData = localStorage.getItem("user");
    
-const initialState: IState = {
+const initialState:IState = {
   userInformation: userData ? JSON.parse(userData) : null,
 }; 
 

@@ -7,6 +7,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import ProfilePages from "./pages/ProfilePages";
 import QuestionPage from "./pages/QuestionPage";
+import ProflieSettings from "./pages/ProflieSettings";
 
 const App: React.FC = (): JSX.Element => {
   return (
@@ -20,6 +21,10 @@ const App: React.FC = (): JSX.Element => {
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile/:username" element={<ProfilePages />} />
+            <Route
+              path="/profile/settings/:username"
+              element={<ProflieSettings />}
+            />
             <Route path="/questionpage/:id" element={<QuestionPage />} />
           </Routes>
         </div>

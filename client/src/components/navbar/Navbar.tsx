@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
   return (
     <div className="flex justify-around items-center h-16 ali w-full bg-gray-800 border border-black ">
       <div
-        className="flex-[2] text-center text-cyan-300 font-extrabold  text-xl"
+        className="flex-[2] text-center cursor-pointer text-cyan-300 font-semibold  text-3xl"
         onClick={() => navigate("/")}
       >
         BRTFORM
