@@ -42,6 +42,8 @@ const ProfilePages: FC = (): JSX.Element => {
     );
   }
 
+  console.log(userInformation);
+
   return (
     <div className="w-full flex flex-col bg-gray-900">
       <div className="flex flex-1 flex-col justify-evenly items-center">
@@ -56,7 +58,7 @@ const ProfilePages: FC = (): JSX.Element => {
           {getAUsersPageData?.username?.toUpperCase()}
         </div>
         <div className="text-green-200 text-lg">
-          Türkiyede yaşıyorum javascirpt react typescript ile ugraşıyorum
+          {userInformation?.biography}
         </div>
       </div>
       <div className="flex flex-1 flex-col  items-center  justify-evenly">

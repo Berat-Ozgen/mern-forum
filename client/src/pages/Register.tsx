@@ -8,6 +8,7 @@ const Register: React.FC = (): JSX.Element => {
   const [username, setUsername] = useState<IRegisterPost["username"]>("");
   const [email, setEmail] = useState<IRegisterPost["email"]>("");
   const [password, setPassword] = useState<IRegisterPost["password"]>("");
+  const [biography, setBiography] = useState<IRegisterPost["biography"]>("");
 
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
@@ -15,6 +16,7 @@ const Register: React.FC = (): JSX.Element => {
   const registerPost: IRegisterPost = {
     username: username,
     email: email,
+    biography: biography,
     password: password,
   };
 
@@ -54,6 +56,22 @@ const Register: React.FC = (): JSX.Element => {
                   }
                   type="text"
                   placeholder="örn/ berat"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                />
+              </div>
+              <div>
+                <label
+                  form="confirm-password"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Biograifi
+                </label>
+                <input
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => {
+                    setBiography(e.target.value as string);
+                  }}
+                  type="text"
+                  placeholder="adım berat TypeScript ile ugraşıyorum..."
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 />
               </div>

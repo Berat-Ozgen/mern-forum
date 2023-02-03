@@ -1,5 +1,6 @@
 export interface IRegisterPost {
-    username: string;
-    email: string;
-    password: string;
-  }
+  username: string;
+  biography: string;
+  email: string;
+  password: string;
+}
