@@ -20,16 +20,6 @@ router.get("/get-user", async (req, res) => {
   }
 });
 
-// navbar kullanıcı getirme
-
-// router.post("/navbar-users", async (req, res) => {
-//   try {
-//     const user = await User.findOne({ username: req.body.username });
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// });
-
 // bütün kullanıcıları getir
 router.get("/get-all-users", async (req, res) => {
   try {
