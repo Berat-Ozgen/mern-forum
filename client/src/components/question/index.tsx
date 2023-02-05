@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
 import { useState } from "react";
 import "animate.css";
+import { capitalizeFirstLetter } from "../../UsefulFunctions/capitalizeFirstLetter";
 
 const QuestionsCont: React.FC<IQuestionProps> = ({
   name,
@@ -82,7 +83,9 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
             }}
           />
         </div>
-        <div className="text-green-300">{name}</div>
+        <div className="text-green-300">
+          {capitalizeFirstLetter(name as string)}
+        </div>
       </div>
       <div className="flex flex-[8] h-full justify-center items-center">
         <span className="text-xl text-red-400">{question}</span>

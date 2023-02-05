@@ -7,7 +7,7 @@ const ProflieSettings = () => {
   const { log } = console;
   const { userInformation } = useAppSelector((state) => state.usersData);
   const [username, setUsername] = useState<editDataI["username"]>("");
-  const [biography, setBiography] = useState<editDataI["username"]>("");
+  const [biography, setBiography] = useState<editDataI["biography"]>("");
 
   const editData: editDataI = {
     username: username,

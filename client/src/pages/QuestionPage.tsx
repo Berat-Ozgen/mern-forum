@@ -25,6 +25,8 @@ const QuestionPage: React.FC = (): JSX.Element => {
     (state) => state.postGetAnswersSlice
   );
 
+  console.log(singleQuestionData);
+
   const deletePost = {
     userId: userInformation?._id as string,
   };
@@ -54,6 +56,7 @@ const QuestionPage: React.FC = (): JSX.Element => {
   useEffect(() => {
     dispatch(getPostAnswers(paramas.id as string));
   }, []);
+
   return (
     <div className="bg-gray-900 flex flex-col items-center justify-evenly overflow-hidden  w-full text-gray-400">
       <div className="w-full flex flex-[1] flex-col items-center justify-center">

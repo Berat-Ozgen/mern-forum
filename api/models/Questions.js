@@ -14,6 +14,10 @@ const QuestionsSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    like: {
+      type: Array,
+      default: [],
+    },
   },
   {
     timestamps: true,

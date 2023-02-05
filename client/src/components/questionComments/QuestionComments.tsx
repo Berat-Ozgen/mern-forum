@@ -22,7 +22,6 @@ const QuestionComments: FC<IProps> = ({
   id,
 }): JSX.Element => {
   const { userInformation } = useAppSelector((state) => state.usersData);
-
   return (
     <div className="flex flex-col w-[85%] border border-slate-500  h-40">
       <div className="flex flex-[1] justify-center items-center text-4xl">
