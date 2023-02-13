@@ -60,4 +60,12 @@ router.delete("/delete-post/:id", async (req, res) => {
   }
 });
 
+// soruyu begenmek
+router.post("/like-post", async (req, res) => {
+  const question = await Question.findById(req.body.questionId);
+  question.like.push(req.body.userId);
+  await question.save();
+  res.status(200).json({ success: true });
+});
+
 module.exports = router;
