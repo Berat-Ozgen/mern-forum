@@ -44,14 +44,22 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
         {postFeatures && (
           <div className="absolute bg-neutral-600 flex flex-col justify-around  right-[-45px] w-32 h-28 border">
             {userInformation?._id === userId && (
-              <div
-                onClick={() => handleDelete(id)}
-                className="text-base w-full hover:bg-slate-800 cursor-pointer  flex justify-evenly items-center"
-              >
-                <span>Postu Sil</span>
-                <span>
-                  <BsFillTrash2Fill />
-                </span>
+              <div>
+                <div
+                  onClick={() => handleDelete(id)}
+                  className="text-base w-full hover:bg-slate-800 cursor-pointer  flex justify-evenly items-center"
+                >
+                  <span>Postu Sil</span>
+                  <span>
+                    <BsFillTrash2Fill />
+                  </span>
+                </div>
+                <div className="text-base w-full hover:bg-slate-800 cursor-pointer flex justify-evenly items-center">
+                  <span>Düzenle</span>
+                  <span>
+                    <AiFillEdit />
+                  </span>
+                </div>
               </div>
             )}
 
@@ -59,12 +67,6 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
               <span>Şikayet et</span>
               <span>
                 <BsFillExclamationDiamondFill />
-              </span>
-            </div>
-            <div className="text-base w-full hover:bg-slate-800 cursor-pointer flex justify-evenly items-center">
-              <span>Düzenle</span>
-              <span>
-                <AiFillEdit />
               </span>
             </div>
           </div>
