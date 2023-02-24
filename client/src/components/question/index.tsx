@@ -8,8 +8,9 @@ import { IQuestionProps } from "../../models/Question";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
 import { useState } from "react";
-import "animate.css";
 import { capitalizeFirstLetter } from "../../UsefulFunctions/capitalizeFirstLetter";
+import { questionLikesFetch } from "../../reduxSlice/fetchSlice/questionLikesSlice";
+import { likeDataI } from "../../models/likeData.models";
 
 const QuestionsCont: React.FC<IQuestionProps> = ({
   name,
@@ -25,6 +26,15 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
   const { userInformation } = useAppSelector((state) => state.usersData);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const likeData: likeDataI = {
+    userId: userInformation?._id as string,
+    questionId: id,
+  };
+
+  const handleLike = () => {
+    dispatch(questionLikesFetch(likeData));
+  };
 
   return (
     <div
@@ -93,7 +103,7 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
         <span className="text-xl text-red-400">{question}</span>
       </div>
       <div className="flex items-center justify-evenly flex-[1]">
-        <div className="text-green-900 cursor-pointer">
+        <div className="text-green-900 cursor-pointer" onClick={handleLike}>
           <AiOutlineLike size={25} />
         </div>
         <div className="text-red-900 cursor-pointer">
@@ -105,5 +115,3 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
 };
 
 export default QuestionsCont;
-
-// userInformation?._id === userId

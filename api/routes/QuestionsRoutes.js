@@ -62,10 +62,15 @@ router.delete("/delete-post/:id", async (req, res) => {
 
 // soruyu begenmek
 router.post("/like-post", async (req, res) => {
-  const question = await Question.findById(req.body.questionId);
-  question.like.push(req.body.userId);
-  await question.save();
-  res.status(200).json({ success: true });
+  try {
+    const question = await Question.findById(req.body.questionId);
+    console.log(question);
+    // question.like.push(req.body.userId);
+    // await question.save();
+    // res.status(200).json({ success: true });
+  } catch (error) {
+    res.status(404).json({ error: "hata aldınız" });
+  }
 });
 
 module.exports = router;
