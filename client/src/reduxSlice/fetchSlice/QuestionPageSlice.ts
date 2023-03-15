@@ -9,7 +9,7 @@ export const singleQuestion = createAsyncThunk(
       if (res.status === 200) {
         return res;
       } else {
-        console.log("hata oluştu", res.status);
+        alert("hata oluştu" + res.status);
       }
     });
 

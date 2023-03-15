@@ -63,11 +63,25 @@ router.delete("/delete-post/:id", async (req, res) => {
 // soruyu begenmek
 router.post("/like-post", async (req, res) => {
   try {
-    const question = await Question.findById(req.body.questionId);
-    console.log(question);
-    // question.like.push(req.body.userId);
-    // await question.save();
-    // res.status(200).json({ success: true });
+    const question = await Questions.findById(req.body.questionId);
+
+    // Kullanıcının daha önce soruyu beğenip beğenmediğini kontrol et
+    const userLikedIndex = question.like.findIndex(
+      (likedUserId) => likedUserId === req.body.userId
+    );
+
+    // Kullanıcının soruyu beğenmemişse, soruyu beğen ve kaydet
+    if (userLikedIndex === -1) {
+      question.like.push(req.body.userId);
+      await question.save();
+      res.status(200).json({ success: true, liked: true });
+    } else {
+      // Kullanıcının soruyu daha önce beğendiği bilgisini sakla ve beğeniyi kaldır
+
+      question.like.splice(userLikedIndex, 1);
+      await question.save();
+      res.status(200).json({ message: "beğeni işlemi başarıyla kaldırıldı" });
+    }
   } catch (error) {
     res.status(404).json({ error: "hata aldınız" });
   }

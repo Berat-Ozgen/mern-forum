@@ -30,6 +30,8 @@ const ProfilePages: FC = (): JSX.Element => {
     dispatch(getSelfUsersPost(username as string));
   }, [username]);
 
+  console.log(getAUsersPageData);
+
   const handlePagePost = (id: string) => {
     navigate(`/questionpage/${id}`);
   };
@@ -41,8 +43,6 @@ const ProfilePages: FC = (): JSX.Element => {
       </div>
     );
   }
-
-  console.log(userInformation);
 
   return (
     <div className="w-full flex flex-col bg-gray-900">

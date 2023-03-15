@@ -21,7 +21,7 @@ const AskQuestion: React.FC<AskQuestionProps> = ({ setModal }): JSX.Element => {
       "http://localhost:8000/api/questions/create-questions",
       quesPost
     )
-      .then((res) => console.log(res))
+      .then((res) => false)
       .finally(() => setModal(false as boolean));
   };
 
