@@ -51,12 +51,19 @@ const Navbar: React.FC = () => {
             setUserName(e.target.value as string);
           }}
           onFocus={getAllUsers}
+          value={usernamee}
           className="bg-green-50 border border-none outline-none text-orange-500  placeholder-sky-700  text-sm rounded-lg block w-3/4 p-2.5 dark:bg-gray-700 dark:border-green-500"
           placeholder="aramak isteginiz konu nedir ?"
         />
         {usernamee.length > 3 &&
           filtredUsers.map((item) => (
-            <div className="absolute border p-1 bg-gray-800 text-cyan-200 w-9/12 top-11">
+            <div
+              onClick={() => {
+                navigate(`/profile/${item.username}`);
+                setUserName("");
+              }}
+              className="absolute border-l border-r border-b cursor-pointer hover:bg-gray-900  p-1 bg-gray-800 text-cyan-200 w-9/12 top-11"
+            >
               {item.username}
             </div>
           ))}
