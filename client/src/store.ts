@@ -10,6 +10,7 @@ import getAUsersSlice from "./reduxSlice/fetchSlice/getAUsers";
 import QuestionAnswersCreateSlice from "./reduxSlice/fetchSlice/QuestionAnswersCreate";
 import postGetAnswersSlice from "./reduxSlice/fetchSlice/postGetAnswers";
 import questionLikesSlice from "./reduxSlice/fetchSlice/questionLikesSlice";
+import questionDisLikeSlice from "./reduxSlice/fetchSlice/questionDisLikeSlice";
 
 export const store = configureStore({
   reducer: {
@@ -24,6 +25,7 @@ export const store = configureStore({
     QuestionAnswersCreateSlice: QuestionAnswersCreateSlice,
     postGetAnswersSlice: postGetAnswersSlice,
     questionLikesSlice: questionLikesSlice,
+    questionDisLikeSlice: questionDisLikeSlice,
   },
 });
 

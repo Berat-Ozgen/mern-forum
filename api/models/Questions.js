@@ -18,6 +18,10 @@ const QuestionsSchema = mongoose.Schema(
       type: Array,
       default: [],
     },
+    dislike: {
+      type: Array,
+      default: [],
+    },
   },
   {
     timestamps: true,

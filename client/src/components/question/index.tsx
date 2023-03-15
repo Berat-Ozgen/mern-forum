@@ -10,7 +10,8 @@ import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
 import { useState } from "react";
 import { capitalizeFirstLetter } from "../../UsefulFunctions/capitalizeFirstLetter";
 import { questionLikesFetch } from "../../reduxSlice/fetchSlice/questionLikesSlice";
-import { likeDataI } from "../../models/likeData.models";
+import { likeAndDisLikeData } from "../../models/likeData.models";
+import { questionDisLikesFetch } from "../../reduxSlice/fetchSlice/questionDisLikeSlice";
 
 const QuestionsCont: React.FC<IQuestionProps> = ({
   name,
@@ -27,13 +28,19 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const likeData: likeDataI = {
+  const likeAndDisLikeData: likeAndDisLikeData = {
     userId: userInformation?._id as string,
     questionId: id,
   };
 
+  // soruya like atmak için
   const handleLike = () => {
-    dispatch(questionLikesFetch(likeData));
+    dispatch(questionLikesFetch(likeAndDisLikeData));
+  };
+
+  // soruya dislike atmak için
+  const handleDisLike = () => {
+    dispatch(questionDisLikesFetch(likeAndDisLikeData));
   };
 
   return (
@@ -107,7 +114,7 @@ const QuestionsCont: React.FC<IQuestionProps> = ({
           <AiOutlineLike size={25} />
         </div>
         <div className="text-red-900 cursor-pointer">
-          <AiOutlineDislike size={25} />
+          <AiOutlineDislike size={25} onClick={handleDisLike} />
         </div>
       </div>
     </div>

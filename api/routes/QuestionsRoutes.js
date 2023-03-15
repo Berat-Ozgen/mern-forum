@@ -87,4 +87,32 @@ router.post("/like-post", async (req, res) => {
   }
 });
 
+//soruya dislike atmak
+
+router.post("/dislike-post", async (req, res) => {
+  try {
+    const question = await Questions.findById(req.body.questionId);
+
+    // Kullanıcının daha önce soruyu beğenip beğenmediğini kontrol et
+    const userDisLikedIndex = question.dislike.findIndex(
+      (likedUserId) => likedUserId === req.body.userId
+    );
+
+    // Kullanıcının soruyu beğenmemişse, soruyu beğen ve kaydet
+    if (userDisLikedIndex === -1) {
+      question.dislike.push(req.body.userId);
+      await question.save();
+      res.status(200).json({ success: true, dislike: true });
+    } else {
+      // Kullanıcının soruyu daha önce beğendiği bilgisini sakla ve beğeniyi kaldır
+
+      question.dislike.splice(userDisLikedIndex, 1);
+      await question.save();
+      res.status(200).json({ message: "Dislike işlemi başarıyla kaldırıldı" });
+    }
+  } catch (error) {
+    res.status(404).json({ error: "hata aldınız" });
+  }
+});
+
 module.exports = router;

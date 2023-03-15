@@ -1,10 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { postLikeDataFecth } from "../../apiFetch/likePost";
-import { likeDataI } from "../../models/likeData.models";
+import { likeAndDisLikeData } from "../../models/likeData.models";
 
 export const questionLikesFetch = createAsyncThunk(
   "questionLikesFetch",
-  async (likeData: likeDataI) => {
+  async (likeData: likeAndDisLikeData) => {
     const response = await postLikeDataFecth(likeData).then((res: any) => {
       if (res.status === 200) {
         alert("Answes successfully");

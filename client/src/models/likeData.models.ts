@@ -1,4 +1,4 @@
-export interface likeDataI {
+export interface likeAndDisLikeData {
   userId: string;
   questionId: string;
 }
