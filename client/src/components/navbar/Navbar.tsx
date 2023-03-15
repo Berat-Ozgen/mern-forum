@@ -45,17 +45,21 @@ const Navbar: React.FC = () => {
         BRTFORM
       </div>
 
-      <div className="flex flex-[5] justify-center items-center">
+      <div className="relative flex flex-[5] justify-center items-center">
         <input
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
             setUserName(e.target.value as string);
           }}
           onFocus={getAllUsers}
-          type="text"
-          id="success"
           className="bg-green-50 border border-none outline-none text-orange-500  placeholder-sky-700  text-sm rounded-lg block w-3/4 p-2.5 dark:bg-gray-700 dark:border-green-500"
           placeholder="aramak isteginiz konu nedir ?"
         />
+        {usernamee.length > 3 &&
+          filtredUsers.map((item) => (
+            <div className="absolute border p-1 bg-gray-800 text-cyan-200 w-9/12 top-11">
+              {item.username}
+            </div>
+          ))}
       </div>
 
       <div className="flex flex-[3] justify-evenly">
