@@ -8,6 +8,7 @@ import Login from "./pages/Login";
 import ProfilePages from "./pages/ProfilePages";
 import QuestionPage from "./pages/QuestionPage";
 import ProflieSettings from "./pages/ProflieSettings";
+import QuestionsYouLike from "./pages/QuestionsYouLike";
 
 const App: React.FC = (): JSX.Element => {
   return (
@@ -26,6 +27,7 @@ const App: React.FC = (): JSX.Element => {
               element={<ProflieSettings />}
             />
             <Route path="/questionpage/:id" element={<QuestionPage />} />
+            <Route path="/QuestionsYouLike" element={<QuestionsYouLike />} />
           </Routes>
         </div>
         <Footer />
