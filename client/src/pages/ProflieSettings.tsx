@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { editProfile } from "../apiFetch/editProfile";
 import { editDataI } from "../models/editDataI.models";
 import { useAppSelector } from "../reduxHooks/storeHook";
+import {useParams} from 'react-router-dom'
+
 
 const ProflieSettings = () => {
   const { log } = console;
+  const params = useParams()
   const { userInformation } = useAppSelector((state) => state.usersData);
   const [username, setUsername] = useState<editDataI["username"]>("");
   const [biography, setBiography] = useState<editDataI["biography"]>("");
@@ -14,6 +17,11 @@ const ProflieSettings = () => {
     biography: biography,
   };
 
+  
+
+  
+
+  // profile güncelleme
   const handleEditProfile = async () => {
     await editProfile(editData, userInformation?._id as string).then((res) => {
       res.status === 200
@@ -22,7 +30,16 @@ const ProflieSettings = () => {
     });
   };
 
-  log(username);
+  useEffect(() => {
+    
+  },[])
+
+  if(params.username === undefined) {
+    return( <div className="flex pt-6 flex-col items-center  w-full bg-gray-900 text-white">
+      Lütfen Önce giriş yapınız
+    </div>
+    ) 
+  }
 
   return (
     <div className="flex pt-6 flex-col items-center  w-full bg-gray-900 text-white">
