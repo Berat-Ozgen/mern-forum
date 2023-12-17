@@ -14,6 +14,14 @@ const QuestionAnswersSchema = mongoose.Schema(
       type: String,
       required: true,
     },
+    like: {
+      type: Array,
+      default: [],
+    },
+    dislike: {
+      type: Array,
+      default: [],
+    },
   },
   {
     timestamps: true,
