@@ -2,10 +2,11 @@ import { useEffect, useState } from "react";
 import { editProfile } from "../apiFetch/editProfile";
 import { editDataI } from "../models/editDataI.models";
 import { useAppSelector } from "../reduxHooks/storeHook";
-import {useParams} from 'react-router-dom'
+import {useParams, useNavigate} from 'react-router-dom'
 
 
 const ProflieSettings = () => {
+  const navigate = useNavigate()
   const { log } = console;
   const params = useParams()
   const { userInformation } = useAppSelector((state) => state.usersData);
@@ -17,9 +18,6 @@ const ProflieSettings = () => {
     biography: biography,
   };
 
-  
-
-  
 
   // profile güncelleme
   const handleEditProfile = async () => {

@@ -2,12 +2,16 @@ import { SlHome, SlLike, SlPeople } from "react-icons/sl";
 import { MdTrendingUp } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import { FiSettings } from "react-icons/fi";
-
+import {useParams} from 'react-router-dom'
 import { Link } from "react-router-dom";
 import { useAppSelector, useAppDispatch } from "../../reduxHooks/storeHook";
 
 const Sidebar: React.FC = (): JSX.Element => {
   const { userInformation } = useAppSelector((state) => state.usersData);
+ const {log} = console
+
+ log(userInformation)
+
   const dispatch = useAppDispatch();
   return (
     <aside className="w-64 h-full">
@@ -69,13 +73,17 @@ const Sidebar: React.FC = (): JSX.Element => {
             </li>
           )}
           <li>
-            <Link
+           {
+            userInformation && (
+              <Link
               to={`/profile/settings/${userInformation?.username}`}
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 mb-5"
             >
               <FiSettings size={20} />
               <span className="flex-1 ml-3 whitespace-nowrap">Ayarlar</span>
             </Link>
+            )
+           }
           </li>
         </ul>
       </div>
