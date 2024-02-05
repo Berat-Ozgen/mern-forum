@@ -44,7 +44,7 @@ router.post("/create-user", async (req, res) => {
 
 // kullanıcı güncelleme
 router.put("/users-edit/:id", async (req, res) => {
-  if ((req.body.userId = req.params.id || req.body.isAdmin)) {
+  if ((req.body.userId == req.params.id || req.body.isAdmin)) {
     if (req.body.password) {
       try {
         const salt = await bcrypt.genSalt(10);
@@ -54,9 +54,7 @@ router.put("/users-edit/:id", async (req, res) => {
       }
     }
     try {
-      const user = await User.findByIdAndUpdate(req.params.id, {
-        $set: req.body,
-      });
+      const user = await User.findByIdAndUpdate(req.params.id, { $set: req.body }, { new: true });
       res.status(200).json(`${user} bilgileriniz bu şekilde güncellenmiştir`);
     } catch (error) {
       res.status(500).json({ error: error });
@@ -65,7 +63,6 @@ router.put("/users-edit/:id", async (req, res) => {
 });
 
 // kullanıcı silme
-
 router.delete("/users-delete/:id", async (req, res) => {
   if ((req.body.userId = req.params.id || req.body.isAdmin)) {
     try {

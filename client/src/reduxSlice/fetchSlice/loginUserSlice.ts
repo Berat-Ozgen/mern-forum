@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { loginPost } from "../../apiFetch/loginFetch";
+import {loginUserSlice} from "../../models/loginUserSlice.model";
+
 
 export const loginUserPost = createAsyncThunk("postData", async (a: any) => {
   const response = await loginPost(a.loginData).then((res) => {
@@ -12,20 +14,9 @@ export const loginUserPost = createAsyncThunk("postData", async (a: any) => {
   return response?.data;
 });
 
-interface IInitialState {
-  createdAt: string;
-  email: string;
-  images: string;
-  biography: string;
-  password: string;
-  updatedAt: string;
-  username: string;
-  _v: number;
-  _id: string;
-}
 
 interface IState {
-  userInformation: IInitialState | null;
+  userInformation: loginUserSlice | null;
 }
 
 const userData = localStorage.getItem("user");

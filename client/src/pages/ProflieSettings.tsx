@@ -16,17 +16,20 @@ const ProflieSettings = () => {
   const editData: editDataI = {
     username: username,
     biography: biography,
+    userId: userInformation?._id
   };
-
 
   // profile güncelleme
   const handleEditProfile = async () => {
+    log(userInformation?._id)
     await editProfile(editData, userInformation?._id as string).then((res) => {
       res.status === 200
         ? alert("Profiliniz başarılı bir şekilde güncellendi")
         : alert("Profilinizi güncellerken malesef bir hata ile karşılaştık");
     });
   };
+
+
 
   useEffect(() => {
     
